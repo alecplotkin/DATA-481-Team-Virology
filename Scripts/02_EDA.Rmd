@@ -1,0 +1,114 @@
+---
+title: "Lung Cancer Dataset Analysis"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(gridExtra)
+library(reshape2)
+
+```
+
+# Description of project
+The project uses a synthetic data set on lung cancer patients for predictive modelling. The data set includes demographic attributes, medical history, treatment specifics, and survival outcomes, making it a great tool for simulating real-world clinical applications and to predict relationship between variables.
+
+# Description of killer graph
+To identify hidden and vital factors that has a statistically significant effect on survival outcomes in lung cancer patients. 
+
+```{r}
+lung_cancer_data <- read.csv("lung_cancer_data.csv")
+head(lung_cancer_data)
+```
+```{r}
+str(lung_cancer_data)
+```
+```{r}
+summary(lung_cancer_data)
+```
+```{r}
+cnrdata <- lung_cancer_data %>% select(-Patient_ID)
+```
+
+```{r}
+# Examining distributions
+
+ggplot(cnrdata, aes(x = Survival_Months)) +
+  geom_histogram(binwidth = 5, fill = "skyblue", alpha = 0.7, color = "black") +
+  labs(title = "Distribution of Survival Months", x = "Survival Months", y = "Frequency") + theme_minimal()
+
+ggplot(cnrdata, aes(x = Performance_Status)) +
+  geom_histogram(binwidth = 5, fill = "skyblue", alpha = 0.7, color = "black") +
+  labs(title = "Distribution of Performance Status", x = "Performance Status", y = "Frequency") + theme_minimal()
+
+ggplot(cnrdata, aes(x = Tumor_Size_mm)) +
+  geom_histogram(binwidth = 5, fill = "skyblue", alpha = 0.7, color = "black") +
+  labs(title = "Distribution of Tumor Size", x = "Tumor Size", y = "Frequency") + theme_minimal()
+```
+
+
+```{r}
+#Distribution of Categorical Variables
+
+df_categorical <- cnrdata %>%
+  select(Gender, Smoking_History, Stage, Treatment, Tumor_Location,  Comorbidity_Autoimmune_Disease)%>%
+  pivot_longer(cols = everything(), names_to = "Variable", values_to = "Category")
+
+ggplot(df_categorical, aes(x = Category)) +
+  geom_bar(fill = "steelblue", alpha = 0.7) +
+  facet_wrap(~ Variable, scales = "free_x") +  
+  labs(title = "Distribution of Categorical Variables", x = "Category", y = "Count") +  theme_minimal() + scale_x_discrete(guide = guide_axis(angle = 45))
+
+```
+```{r}
+# #Distribution of Numerical Variables
+continuous_vars <- c("Age",  "Smoking_Pack_Years", "Hemoglobin_Level", "Platelet_Count", "LDH_Level")
+
+histograms <- lapply(continuous_vars, function(var) {
+  ggplot(cnrdata, aes_string(x = var)) +
+    geom_histogram(binwidth = 10, fill = "pink", color = "black", alpha = 0.7) +
+    labs(title = paste("Distribution of", var), x = var, y = "Frequency") +
+    theme_minimal(base_size = 12) +
+    theme(
+      plot.title = element_text(size = 14, face = "bold"),
+      axis.text.x = element_text(size = 10),
+      axis.text.y = element_text(size = 10),
+      plot.margin = margin(5, 5, 5, 5)  # Smaller plot margins
+    )
+})
+
+# Arrange histograms in a grid layout with smaller spaces
+do.call(grid.arrange, c(histograms, ncol = 2, top = "Histograms of Continuous Variables"))
+```
+
+```{r}
+# Mean survival months vs. numerical variables
+for (var in continuous_vars) {
+  print(
+    ggplot(cnrdata, aes_string(x = var, y = "Survival_Months")) +
+      stat_summary_bin(
+        fun = "mean", binwidth=5, geom = "bar", fill = "steelblue",
+        alpha = 0.7 ) + labs( title = paste("Mean Survival Months by ", var), x = var, y = "Mean Survival Months") +theme_minimal(base_size = 14) +
+      theme(plot.title = element_text(size = 16, face = "bold"),
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 12)
+      ))}
+
+```
+
+```{r}
+# Heat map showing correlation between variables
+numeric_data <- cnrdata %>% select(where(is.numeric))
+corr_mat <- round(cor(numeric_data),2) 
+
+melted_corr_mat = melt(corr_mat)
+
+ggplot(data = melted_corr_mat, aes(x=Var1, y=Var2, fill=value)) + 
+geom_tile()+
+theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, size = 10))
+```
+

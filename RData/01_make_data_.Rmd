@@ -30,5 +30,8 @@ dim(lung_cancer_data)
 ```{r}
 str(lung_cancer_data)
 ```
+```{r}
+sapply(lung_cancer_data, function(x) sum(is.na(x)))
+```
 
 
