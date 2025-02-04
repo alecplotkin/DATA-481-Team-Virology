@@ -1,0 +1,372 @@
+# -----------------------------------------------------------------------------------------------------#
+# read in libraries#
+library(foreign)#
+library(gdata)#
+library(MASS)#
+library(DAAG)#
+library(RColorBrewer)#
+library(psych)#
+library(FactoMineR)#
+library(heatmap.plus)#
+library(ggplot2)#
+#
+#
+# -----------------------------------------------------------------------------------------------------#
+# read in the data#
+s001 <- read.dta("AMC 001 for AMC stats stata verion 9.dta")#
+summary(s001)
+head(s001)
+nrow(s001)
+s001 <- na.omit(s001)
+nrow(s001)
+s001 <- read.dta("AMC 001 for AMC stats stata verion 9.dta")#
+summary(s001)#
+head(s001)#
+nrow(s001)
+subset(s001, is.na(s001$orf21))
+s001 <- read.dta("AMC 001 for AMC stats stata verion 9.dta")#
+summary(s001)#
+head(s001)#
+nrow(s001)#
+s001 <- na.omit(s001)#
+nrow(s001)
+# -----------------------------------------------------------------------------------------------------#
+# encode the factors#
+s001$bpmmhg <- factor(s001$bpmmhg)#
+s001$lymphnode <- factor(s001$lymphnode)#
+s001$karnovisky <- factor(s001$karnovisky, ordered = TRUE)#
+s001$t_stage<- factor(s001$t_stage)#
+s001$tumor1edema<- factor(s001$tumor1edema)#
+#
+s001$tumor1oral<- factor(s001$tumor1oral)#
+s001$tumor1gastro<- factor(s001$tumor1gastro)#
+s001$tumor1viscera<- factor(s001$tumor1viscera)#
+#
+s001$orf36<- factor(s001$orf36)#
+s001$Kover70<- factor(s001$Kover70)#
+s001$cd4under200<- factor(s001$cd4under200)#
+#
+s001$bmi_low<- factor(s001$bmi_low)#
+s001$KS_nd<- factor(s001$KS_nd)#
+s001$orf21<- factor(s001$orf21)
+# -----------------------------------------------------------------------------------------------------#
+# read in the data#
+# -----------------------------------------------------------------------------------------------------#
+s001 <- read.dta("AMC 001 for AMC stats stata verion 9.dta")#
+summary(s001)#
+head(s001)#
+nrow(s001)#
+#
+# -----------------------------------------------------------------------------------------------------#
+# encode the factors#
+# -----------------------------------------------------------------------------------------------------#
+s001$bpmmhg <- factor(s001$bpmmhg)#
+s001$lymphnode <- factor(s001$lymphnode)#
+s001$karnovisky <- factor(s001$karnovisky, ordered = TRUE)#
+s001$t_stage<- factor(s001$t_stage)#
+s001$tumor1edema<- factor(s001$tumor1edema)#
+#
+s001$tumor1oral<- factor(s001$tumor1oral)#
+s001$tumor1gastro<- factor(s001$tumor1gastro)#
+s001$tumor1viscera<- factor(s001$tumor1viscera)#
+#
+s001$orf36<- factor(s001$orf36)#
+s001$Kover70<- factor(s001$Kover70)#
+s001$cd4under200<- factor(s001$cd4under200)#
+#
+s001$bmi_low<- factor(s001$bmi_low)#
+s001$KS_nd<- factor(s001$KS_nd)#
+s001$orf21<- factor(s001$orf21)#
+#
+#
+# -----------------------------------------------------------------------------------------------------#
+# eliminate incomplete records#
+# -----------------------------------------------------------------------------------------------------#
+s001 <- na.omit(s001)#
+s001 <- drop.levels(s001)#
+nrow(s001)#
+head(s001)#
+summary(s001)
+s001small <- drop.levels(s001small)
+s001small <- subset(s001, s001$tumor1viscera != 1)#
+s001small <- drop.levels(s001small)
+summary(s001small)
+s001small <- subset(s001, s001$tumor1oral != 1)#
+s001small <- drop.levels(s001small)#
+summary(s001small)
+# no visceral involvement#
+s001small <- subset(s001, s001$tumor1viscera != 1)#
+s001small <- drop.levels(s001small)#
+summary(s001small)#
+#
+# no oral involvement#
+s001small <- subset(s001small, s001small$tumor1oral != 1)#
+s001small <- drop.levels(s001small)#
+summary(s001small)
+attach(s001small)
+table(t_stage)
+# -----------------------------------------------------------------------------------------------------#
+# read in the data#
+# -----------------------------------------------------------------------------------------------------#
+s001 <- read.dta("AMC 001 for AMC stats stata verion 9.dta")#
+summary(s001)#
+head(s001)#
+nrow(s001)#
+#
+# -----------------------------------------------------------------------------------------------------#
+# encode the factors#
+# -----------------------------------------------------------------------------------------------------#
+s001$bpmmhg <- factor(s001$bpmmhg)#
+s001$lymphnode <- factor(s001$lymphnode)#
+s001$karnovisky <- factor(s001$karnovisky, ordered = TRUE)#
+s001$t_stage<- factor(s001$t_stage, ordered = TRUE)#
+s001$tumor1edema<- factor(s001$tumor1edema, ordered = TRUE, levels = c("no","yes"))#
+#
+s001$tumor1oral<- factor(s001$tumor1oral)#
+s001$tumor1gastro<- factor(s001$tumor1gastro)#
+s001$tumor1viscera<- factor(s001$tumor1viscera)#
+#
+s001$orf36<- factor(s001$orf36)#
+s001$Kover70<- factor(s001$Kover70)#
+s001$cd4under200<- factor(s001$cd4under200)#
+#
+s001$bmi_low<- factor(s001$bmi_low)#
+s001$KS_nd<- factor(s001$KS_nd)#
+s001$orf21<- factor(s001$orf21)#
+#
+#
+# -----------------------------------------------------------------------------------------------------#
+# eliminate incomplete records#
+# -----------------------------------------------------------------------------------------------------#
+s001 <- na.omit(s001)#
+s001 <- drop.levels(s001)#
+nrow(s001)#
+head(s001)#
+summary(s001)
+# -----------------------------------------------------------------------------------------------------#
+# read in the data#
+# -----------------------------------------------------------------------------------------------------#
+s001 <- read.dta("AMC 001 for AMC stats stata verion 9.dta")#
+summary(s001)#
+head(s001)#
+nrow(s001)#
+#
+# -----------------------------------------------------------------------------------------------------#
+# encode the factors#
+# -----------------------------------------------------------------------------------------------------#
+s001$bpmmhg <- factor(s001$bpmmhg)#
+s001$lymphnode <- factor(s001$lymphnode)#
+s001$karnovisky <- factor(s001$karnovisky, ordered = TRUE)#
+s001$t_stage<- factor(s001$t_stage, ordered = TRUE)#
+s001$tumor1edema<- factor(s001$tumor1edema, ordered = TRUE, labels = c("no","yes"))
+s001$tumor1oral<- factor(s001$tumor1oral)#
+s001$tumor1gastro<- factor(s001$tumor1gastro)#
+s001$tumor1viscera<- factor(s001$tumor1viscera)#
+#
+s001$orf36<- factor(s001$orf36)#
+s001$Kover70<- factor(s001$Kover70)#
+s001$cd4under200<- factor(s001$cd4under200)#
+#
+s001$bmi_low<- factor(s001$bmi_low)#
+s001$KS_nd<- factor(s001$KS_nd)#
+s001$orf21<- factor(s001$orf21)#
+#
+#
+# -----------------------------------------------------------------------------------------------------#
+# eliminate incomplete records#
+# -----------------------------------------------------------------------------------------------------#
+s001 <- na.omit(s001)#
+s001 <- drop.levels(s001)#
+nrow(s001)#
+head(s001)#
+summary(s001)
+s001 <- read.dta("AMC 001 for AMC stats stata verion 9.dta")#
+summary(s001)
+detach(s001small)
+# -----------------------------------------------------------------------------------------------------#
+# read in the data#
+# -----------------------------------------------------------------------------------------------------#
+s001 <- read.dta("AMC 001 for AMC stats stata verion 9.dta")#
+summary(s001)#
+head(s001)#
+nrow(s001)#
+#
+# -----------------------------------------------------------------------------------------------------#
+# encode the factors#
+# -----------------------------------------------------------------------------------------------------#
+s001$bpmmhg <- factor(s001$bpmmhg)#
+s001$lymphnode <- factor(s001$lymphnode)#
+s001$karnovisky <- factor(s001$karnovisky, ordered = TRUE)#
+s001$t_stage<- factor(s001$t_stage, ordered = TRUE)#
+s001$tumor1edema<- factor(s001$tumor1edema, ordered = TRUE, labels = c("no","yes"))#
+#
+s001$tumor1oral<- factor(s001$tumor1oral)#
+s001$tumor1gastro<- factor(s001$tumor1gastro)#
+s001$tumor1viscera<- factor(s001$tumor1viscera)#
+#
+s001$orf36<- factor(s001$orf36)#
+s001$Kover70<- factor(s001$Kover70)#
+s001$cd4under200<- factor(s001$cd4under200)#
+#
+s001$bmi_low<- factor(s001$bmi_low)#
+s001$KS_nd<- factor(s001$KS_nd)#
+s001$orf21<- factor(s001$orf21)#
+#
+#
+# -----------------------------------------------------------------------------------------------------#
+# eliminate incomplete records#
+# -----------------------------------------------------------------------------------------------------#
+s001 <- na.omit(s001)#
+s001 <- drop.levels(s001)#
+nrow(s001)#
+head(s001)#
+summary(s001)#
+#
+#
+# -----------------------------------------------------------------------------------------------------#
+# eliminate dulicate records#
+# -----------------------------------------------------------------------------------------------------#
+nrow(s001)#
+s001 <- unique(s001)#
+nrow(s001)#
+#
+#
+# -----------------------------------------------------------------------------------------------------#
+# subsets#
+# -----------------------------------------------------------------------------------------------------#
+#
+# no visceral involvement#
+s001small <- subset(s001, s001$tumor1viscera != 1)#
+s001small <- drop.levels(s001small)#
+summary(s001small)#
+#
+# no oral involvement#
+s001small <- subset(s001small, s001small$tumor1oral != 1)#
+s001small <- drop.levels(s001small)#
+summary(s001small)
+# -----------------------------------------------------------------------------------------------------#
+# read in the data#
+# -----------------------------------------------------------------------------------------------------#
+s001 <- read.dta("AMC 001 for AMC stats stata verion 9.dta")#
+summary(s001)#
+head(s001)#
+nrow(s001)#
+#
+# -----------------------------------------------------------------------------------------------------#
+# encode the factors#
+# -----------------------------------------------------------------------------------------------------#
+s001$bpmmhg <- factor(s001$bpmmhg)#
+s001$lymphnode <- factor(s001$lymphnode, ordered = TRUE, labels = c("no","yes"))#
+s001$karnovisky <- factor(s001$karnovisky, ordered = TRUE)#
+s001$t_stage<- factor(s001$t_stage, ordered = TRUE)#
+s001$tumor1edema<- factor(s001$tumor1edema, ordered = TRUE, labels = c("no","yes"))#
+#
+s001$tumor1oral<- factor(s001$tumor1oral)#
+s001$tumor1gastro<- factor(s001$tumor1gastro)#
+s001$tumor1viscera<- factor(s001$tumor1viscera)#
+#
+s001$orf36<- factor(s001$orf36, ordered = TRUE, labels = c("no","yes"))#
+s001$Kover70<- factor(s001$Kover70, ordered = TRUE, labels = c("no","yes"))#
+s001$cd4under200<- factor(s001$cd4under200, ordered = TRUE, labels = c("no","yes"))#
+#
+s001$bmi_low<- factor(s001$bmi_low, ordered = TRUE, labels = c("no","yes"))#
+s001$KS_nd<- factor(s001$KS_nd, ordered = TRUE, labels = c("no","yes"))#
+s001$orf21<- factor(s001$orf21, ordered = TRUE, labels = c("no","yes"))#
+#
+#
+# -----------------------------------------------------------------------------------------------------#
+# eliminate incomplete records#
+# -----------------------------------------------------------------------------------------------------#
+s001 <- na.omit(s001)#
+s001 <- drop.levels(s001)#
+nrow(s001)#
+head(s001)#
+summary(s001)#
+#
+#
+# -----------------------------------------------------------------------------------------------------#
+# eliminate dulicate records#
+# -----------------------------------------------------------------------------------------------------#
+nrow(s001)#
+s001 <- unique(s001)#
+nrow(s001)#
+#
+#
+# -----------------------------------------------------------------------------------------------------#
+# subsets#
+# -----------------------------------------------------------------------------------------------------#
+#
+# no visceral involvement#
+s001small <- subset(s001, s001$tumor1viscera != 1)#
+s001small <- drop.levels(s001small)#
+summary(s001small)#
+#
+# no oral involvement#
+s001small <- subset(s001small, s001small$tumor1oral != 1)#
+s001small <- drop.levels(s001small)#
+summary(s001small)
+attach(s001small)
+table(t_stage)
+table(t_stage, lymphnode)
+tapply(cd4count, t_stage, median)
+tapply(cd4count, lymphnode, median)
+s001small[,cd4count]
+s001small[cd4count,]
+s001small[,2]
+s001small[,3]
+s001small[,c(1:2)]
+s001small[,c("t_stage")]
+s001small[,c("t_stage","cd4count")]
+s001small[,c("lymphnode","cd4count")]
+table(t_stage, lymphnode)
+table(lymphnode)
+s001 <- read.dta("AMC 001 for AMC stats stata verion 9.dta")#
+summary(s001)
+s001 <- read.dta("AMC 001 for AMC stats stata verion 9.dta")#
+summary(s001)#
+head(s001)#
+nrow(s001)#
+#
+# -----------------------------------------------------------------------------------------------------#
+# encode the factors#
+# -----------------------------------------------------------------------------------------------------#
+s001$bpmmhg <- factor(s001$bpmmhg)#
+s001$lymphnode <- factor(s001$lymphnode, ordered = TRUE, labels = c("no","yes"))#
+s001$karnovisky <- factor(s001$karnovisky, ordered = TRUE)#
+s001$t_stage<- factor(s001$t_stage, ordered = TRUE)#
+s001$tumor1edema<- factor(s001$tumor1edema, ordered = TRUE, labels = c("no","yes"))#
+#
+s001$tumor1oral<- factor(s001$tumor1oral)#
+s001$tumor1gastro<- factor(s001$tumor1gastro)#
+s001$tumor1viscera<- factor(s001$tumor1viscera)#
+#
+s001$orf36<- factor(s001$orf36, ordered = TRUE, labels = c("no","yes"))#
+s001$Kover70<- factor(s001$Kover70, ordered = TRUE, labels = c("no","yes"))#
+s001$cd4under200<- factor(s001$cd4under200, ordered = TRUE, labels = c("no","yes"))#
+#
+s001$bmi_low<- factor(s001$bmi_low, ordered = TRUE, labels = c("no","yes"))#
+s001$KS_nd<- factor(s001$KS_nd, ordered = TRUE, labels = c("no","yes"))#
+s001$orf21<- factor(s001$orf21, ordered = TRUE, labels = c("no","yes"))#
+#
+#
+# -----------------------------------------------------------------------------------------------------#
+# eliminate incomplete records#
+# -----------------------------------------------------------------------------------------------------#
+s001 <- na.omit(s001)#
+s001 <- drop.levels(s001)#
+nrow(s001)#
+head(s001)#
+summary(s001)
+tapply(cd4count, lymphnode, median)
+s001 <- read.dta("AMC 001 for AMC stats stata verion 9.dta")
+s001[,c("lymphnode","cd4count")]
+wilcox.test(cd4count ~ lymphnode)
+summary(s001small)
+tapply(hivrna, lymphnode, median)#
+wilcox.test(hivrna ~ lymphnode)
+table(t_stage, lymphnode)
+fisher.test(t_stage, lymphnode,#
+            or = 1, #
+            alternative = "two.sided",#
+            conf.int = TRUE, #
+            conf.level = 0.95)

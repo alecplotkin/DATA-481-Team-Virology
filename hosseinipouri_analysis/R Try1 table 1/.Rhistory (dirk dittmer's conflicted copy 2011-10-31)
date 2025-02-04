@@ -1,0 +1,409 @@
+View(mir)
+pairs.panels(mirall[,2:5], main = "", hist.col = "gray", digits = 4, lm = FALSE)
+pairs.panels(mirall[,2:20], main = "", hist.col = "gray", digits = 4, lm = FALSE)
+pairs.panels(mirall[,21:40], main = "", hist.col = "gray", digits = 4, lm = FALSE)
+pairs.panels(mirall[,81:100], main = "", hist.col = "gray", digits = 4, lm = TRUE)
+plot(density(mirall$Cp), main = "prior", pch = 19, col = "darkblue", type = "h", xlab = "-dCT", ylab = "Density", xaxs = "r",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,0.2), yaxp = c(0,0.2,5), xlim = c(0,60), xaxp = c(0,60,6))
+rug(subset(mirall$Cp, mirall$Cp != "NTC"), col = "red", lwd = 1, cex = 1.5, side = 3)
+mirall.2[mirall.2$Cp > 40,"Cp"] <- jitter(39, amount = 1)
+mirall.2[mirall.2$Cp > 39,"Cp"] <- jitter(38, amount = 1)
+mirall.2[mirall.2$Cp < 19,"Cp"] <- 45
+plot(density(mirall.wide$Cp), main = "prior", pch = 19, col = "darkblue", type = "h", xlab = "-dCT", ylab = "Density", xaxs = "r",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,0.2), yaxp = c(0,0.2,5), xlim = c(0,60), xaxp = c(0,60,6))
+plot(density(mirall.2$Cp), main = "post", pch = 19, col = "darkblue", type = "h", xlab = "-dCT", ylab = "Density", xaxs = "r",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,0.2), yaxp = c(0,0.2,5), xlim = c(0,60), xaxp = c(0,60,6))
+head(mirall.2, n = 2)
+head(mirall, n = 2)
+try2 <- mirall[,2:ncol(mirall)]
+try2 <- mirall.2[,2:ncol(mirall)]
+plot.PCA(mir.pca, cex=0.5, choix ="var")
+heatmap.plus(try3, scale = "row",col = brewer.pal(9,"YlOrBr"), hclustfun=function(m) hclust(m, method="average"), distfun = function(x) dist(x, method = "euclidian"))
+heatmap.plus(try3, scale = "column",col = brewer.pal(9,"YlOrBr"), hclustfun=function(m) hclust(m, method="average"), distfun = function(x) dist(x, method = "euclidian"))
+heatmap.plus(try3, scale = "none",col = brewer.pal(9,"YlOrRd"), hclustfun=function(m) hclust(m, method="average"), distfun = function(x) dist(x, method = "euclidian"))
+heatmap.plus(try3, scale = "column",col = brewer.pal(9,"RdGy"), hclustfun=function(m) hclust(m, method="average"), distfun = function(x) dist(x, method = "euclidian"))
+# STEP 1:    Read in deltaCT data normalized to a "housekeeping" gene or set of housekeeping genes.
+#            Each column is one array.
+#            At least one column has to have unique row identifiers, i.e. if a primer pair is used twice
+#            it has to have a different name in the column "unique".
+#            Column "unique" is easily constructed, e.g. by concatenating well name and primer name.
+mir <- na.omit(mir)
+mir <- drop.levels(mir)
+# Need to change one numeric variable to factor
+# mir$plate <- as.factor(mir$plate)
+# Use the summary function to check if there are any NAs in any of the columns.
+#         If there are any go back into excel and double check,
+#         Else proceed with the analysis.
+# Construct a combined data table called mirall with the option to leave out specific data columns,
+# i.e. arrays/experiments
+mirall <- mir[,1:99]
+ncol(mirall)
+head(mirall)
+# STEP 2:    Splom, comparison of timeseries of sub-groups on scaled data
+pairs.panels(mirall[,2:20], main = "", hist.col = "gray", digits = 4, lm = TRUE)
+pairs.panels(mirall[,21:40], main = "", hist.col = "gray", digits = 4, lm = TRUE)
+pairs.panels(mirall[,41:60], main = "", hist.col = "gray", digits = 4, lm = TRUE)
+pairs.panels(mirall[,61:80], main = "", hist.col = "gray", digits = 4, lm = TRUE)
+pairs.panels(mirall[,81:ncol(mirall)], main = "", hist.col = "gray", digits = 4, lm = TRUE)
+# STEP 3:    Melt of dCT data. NOTE that this uses non-scaled data							INPUT:
+#                                                                                           mirall
+mirall.wide <- melt(mirall)
+colnames(mirall.wide)
+table(mirall.wide$unique)
+mirall.wide <- na.omit(mirall.wide)
+mirall.wide<- drop.levels(mirall.wide)
+summary(mirall.wide)
+colnames(mirall.wide) <- c("primer","RT","Cp")
+nrow(mirall.wide)
+# Generating an optimized dataset mirall.2 for later
+plot(density(mirall.wide$Cp), main = "prior", pch = 19, col = "darkblue", type = "h", xlab = "Cp", ylab = "Density", xaxs = "r",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,0.2), yaxp = c(0,0.2,5), xlim = c(0,60), xaxp = c(0,60,6))
+rug(subset(mirall.wide$Cp, mirall.wide$Cp != "NTC"), col = "red", lwd = 1, cex = 1.5, side = 3)
+mirall.2 <- mirall.wide
+# mirall.2[mirall.2$Cp < 19,"Cp"] <- 45
+mirall.2[mirall.2$Cp > 39,"Cp"] <- jitter(39, amount = 1)
+stem(mirall.2$Cp, scale  = 3)
+plot(density(mirall.2$Cp), main = "post", pch = 19, col = "darkblue", type = "h", xlab = "Cp", ylab = "Density", xaxs = "r",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,0.2), yaxp = c(0,0.2,5), xlim = c(0,60), xaxp = c(0,60,6))
+rug(subset(mirall.2$Cp, mirall.2$Cp != "NTC"), col = "red", lwd = 1, cex = 1.5, side = 3)
+abline(h = 0.025, col = "white", lty = 1, lwd = 2)
+abline(h = 0.05, col = "white", lty = 1, lwd = 2)
+abline(h = 0.075, col = "white", lty = 1, lwd = 2)
+mirall.2 <- cast(mirall.2, primer ~ RT)
+mirall.2 <- na.omit(mirall.2)
+mirall.2 <- drop.levels(mirall.2)
+summary(mirall.2)
+head(mirall.2)
+# FIGURE 3: PCA
+#
+# Switch columns and rows 														          INPUT
+# NOTE try2.t is  a matrix not a dataframe											mirall
+try2 <- mirall.2[,2:ncol(mirall.2)]
+colnames(try2)
+rownames(try2) <- mirall.2$primer
+summary(try2)
+head(try2)
+try2.t <- t(try2)
+summary(try2.t)
+rownames(try2.t)<- colnames(try2)
+colnames(try2.t)<- rownames(try2)
+# eliminate specific genes if necessary
+try2.t <- try2.t[,1:ncol(try2.t)]
+ncol(try2.t)
+nrow(try2.t)
+rownames(try2.t)
+colnames(try2.t)
+head(try2.t)
+# PCA on unscaled data, except PCA does the scaling (scale.unit = T) for each factor
+mir.pca <- PCA(try2.t, scale.unit = T, ncp = 5, graph = F)
+plot.PCA(mir.pca, cex=0.5, choix ="ind")
+mir.hcpc = HCPC(mir.pca)
+try3 <- scale(try2.t, center = FALSE, scale = FALSE)
+summary(try3)
+heatmap.plus(try3, scale = "none",col = brewer.pal(9,"RdGy"), hclustfun=function(m) hclust(m, method="average"), distfun = function(x) dist(x, method = "euclidian"))
+# -------------------------------------------------------------------------------------
+# OUTPUT 1: Write out transposed dataframe of primers as columns
+try3 <- data.frame(try3)
+try3$condition <- factor(rownames(try3))
+# splitting composite names into factors again
+try3$cell <- factor(substring(try3$condition,1,5))
+try3$treatment <- factor(substring(try3$condition,7,8))
+try3$time <- factor(substring(try3$condition,10,10), ordered = T)
+# write output
+write.table (try3, file = "transposedCT.txt")
+colnames(mirall.2)
+ncol(mirall.2)
+try4 <- mirall.2[,2:ncol(mirall)]
+colnames(try4)
+rownames(try4) <- mirall.2$unique
+rownames(try4) <- mirall.2$primer
+numericncol <- ncol(try4)
+try4$min <- apply(try4[,1:numericncol], MARGIN = 1, FUN = min)
+try4$max <- apply(try4[,1:numericncol], MARGIN = 1, FUN = max)
+# calculate a stabilized measure of dispersion (m.a.d)
+try4$mad <- apply(try4[,1:numericncol], MARGIN = 1, FUN = mad)
+try4$range <- try4$max - try4$min
+min(try4$range)
+summary(try4$range)
+summary(try4$mad)
+head(try4)
+plot(try4$range, main = nrow(try4), pch = 19, col = "darkblue", type = "h", xlab = "gene rank", ylab = "range dCT", xaxs = "i",yaxs = "i", cex = 1.0, las = 1, lwd = 4, ylim = c(0,50), yaxp = c(0,50,5))
+par(mfrow = c(1,2))
+try4<- try4[order(try4$range, decreasing = T),]
+plot(try4$range, main = nrow(try4), pch = 19, col = "darkblue", type = "h", xlab = "gene rank", ylab = "range dCT", xaxs = "i",yaxs = "i", cex = 1.0, las = 1, lwd = 4, ylim = c(0,25), yaxp = c(0,25,5))
+abline(h = max(try4$range)/4, col = "red",lty = 3, lwd = 2)
+abline(h = fivenum(try4$range)[4]/4, col = "green",lty = 4, lwd = 2)
+try4<- try4[order(try4$mad, decreasing = T),]
+plot(try4$mad, main = nrow(try4), pch = 19, col = "darkblue", type = "h", xlab = "gene rank", ylab = "m.a.d dCT", xaxs = "i",yaxs = "i", cex = 1.0, las = 1, lwd = 4, ylim = c(0,25), yaxp = c(0,25,5))
+abline(h = max(try4$mad)/4, col = "red",lty = 3, lwd = 2)
+abline(h = fivenum(try4$mad)[4]/4, col = "green",lty = 4, lwd = 2)
+par(mfrow = c(1,1))
+par(bty="l")
+par(cex=1.6)
+plot(try4$mad, try4$range, main = "Consistantly changed genes", pch = 19, col = "darkblue", type = "p", xlab = "m.a.d. of dCT", ylab = "range of dCT", xaxs = "i",yaxs = "i", cex = 0.4, las = 1, lwd = 4, ylim = c(0,25), yaxp = c(0,25,5), xlim = c(0,25), xaxp = c(0,25,5))
+abline(v = max(try4$mad)/4, col = "red", lty = 3, lwd = 2)
+abline(v = fivenum(try4$mad)[4]/4, col = "green",lty = 4, lwd = 2)
+text(x = fivenum(try4$mad)[4]/4, y = 20, "Q3", col = "green")
+try5 <- subset(try4, try4$mad > (fivenum(try4$mad)[4]/4))
+try5 <- drop.levels(try5)
+head(try5)
+colnames(try5)
+rownames(try5)
+try5 <- try5[,1:98]
+try5.t <- t(try5)
+summary(try5.t)
+ncol(try5.t)
+nrow(try5.t)
+rownames(try5.t) <- colnames(try5)
+colnames(try5.t) <- rownames(try5)
+head(try5.t)
+try5 <- scale(try5.t, center = FALSE, scale = FALSE)
+summary(try5)
+ncol(try5)
+nrow(try5)
+heatmap.plus(try5, scale = "none",col = brewer.pal(9,"YlOrBr"), hclustfun=function(m) hclust(m, method="complete"), distfun = function(x) dist(x, method = "euclidean"))
+heatmap.plus(try5, scale = "column",col = brewer.pal(9,"YlOrBr"), hclustfun=function(m) hclust(m, method="complete"), distfun = function(x) dist(x, method = "euclidean"))
+heatmap.plus(try5, scale = "column",col = brewer.pal(11,"RdGy"), hclustfun=function(m) hclust(m, method="complete"), distfun = function(x) dist(x, method = "euclidean"))
+heatmap.plus(try5, scale = "row",col = brewer.pal(11,"RdGy"), hclustfun=function(m) hclust(m, method="complete"), distfun = function(x) dist(x, method = "euclidean"))
+heatmap.plus(try5, scale = "none",col = brewer.pal(9,"YlOrBr"), hclustfun=function(m) hclust(m, method="complete"), distfun = function(x) dist(x, method = "manhattan"))
+heatmap.plus(try5, scale = "none",col = brewer.pal(9,"YlOrBr"), hclustfun=function(m) hclust(m, method="complete"), distfun = function(x) dist(x, method = "euclidian"))
+heatmap.plus(try5, scale = "none",col = brewer.pal(9,"YlOrBr"), hclustfun=function(m) hclust(m, method="single"), distfun = function(x) dist(x, method = "euclidian"))
+heatmap.plus(try5, scale = "none",col = brewer.pal(9,"YlOrBr"), hclustfun=function(m) hclust(m, method="ward"), distfun = function(x) dist(x, method = "euclidian"))
+heatmap.plus(try5, scale = "row",col = brewer.pal(9,"YlOrBr"), hclustfun=function(m) hclust(m, method="ward"), distfun = function(x) dist(x, method = "euclidian"))
+heatmap.plus(try5, scale = "row",col = brewer.pal(9,"RdGy"), hclustfun=function(m) hclust(m, method="ward"), distfun = function(x) dist(x, method = "euclidian"))
+heatmap.plus(try5, scale = "row",col = brewer.pal(5,"RdGy"), hclustfun=function(m) hclust(m, method="ward"), distfun = function(x) dist(x, method = "euclidian"))
+heatmap.plus(try5, scale = "row",col = brewer.pal(11,"RdGy"), hclustfun=function(m) hclust(m, method="ward"), distfun = function(x) dist(x, method = "euclidian"))
+heatmap.plus(try5, scale = "none",col = brewer.pal(11,"YlOrBr"), hclustfun=function(m) hclust(m, method="ward"), distfun = function(x) dist(x, method = "euclidian"))
+setwd("~/Dropbox/Rapalog Review/Figure")
+# read in libraries
+library(gdata)
+library(MASS)
+library(DAAG)
+library(RColorBrewer)
+library(psych)
+library(FactoMineR)
+library(heatmap.plus)
+library(ggplot2)
+# read in deltaCT data normalized to a "housekeeping" gene or geneset
+mir <- read.delim("data.txt", header = TRUE, sep = "\t")
+nrow(mir)
+library(portfolio)
+# -----------------------------------------------------------------------------------------------------
+# construct a combined data table called mirall with the option to leave out specific data columns
+ncol(mir)
+colnames(mir)
+mirall <- mir[,1:ncol(mir)-1]
+mirall <- na.omit(mirall)
+mirall <- drop.levels(mirall)
+nrow(mirall)
+colnames(mirall)
+summary(mirall)
+par(mfrow = c(2,2))
+par(bty="n")
+par(cex=1.0)
+plot(mirall$drug, main = "Agents", col = "black", xlab = "", ylab = "No. of trials")
+plot(mirall$cancer, main = "Tumortype", col = "black", xlab = "", ylab = "No. of trials")
+plot(mirall$phase, main = "Phase", col = "black", xlab = "", ylab = "No. of trials")
+plot(mirall$action, main = "Drug type", col = "black", xlab = "", ylab = "No. of trials")
+mosaicplot(table(mirall$action,mirall$phase), color = TRUE, main = "Status", cex.axis = 1.0, las = 1)
+# -----------------------------------------------------------------------------------------------------#
+# read in libraries#
+# -----------------------------------------------------------------------------------------------------#
+library(foreign)#
+library(gdata)#
+library(MASS)#
+library(DAAG)#
+library(RColorBrewer)#
+library(psych)#
+library(FactoMineR)#
+library(heatmap.plus)#
+library(ggplot2)#
+#
+#
+# -----------------------------------------------------------------------------------------------------#
+# enrollment#
+# -----------------------------------------------------------------------------------------------------#
+mir <- read.delim("days.txt", header = TRUE, sep = "\t")#
+mir <- na.omit(mir)#
+mir <- drop.levels(mir)#
+nrow(mir)
+par(mfrow = c(1,1))#
+par(bty="n")#
+par(cex=1.0)#
+plot(mir, main = "enrollmemt", pch = 19, col = "black", type = "h", xlab = "dCTU6", ylab = "Density", xaxs = "r",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,0.1),yaxp = c(0,0.1,2), xlim = c(0,4000))#
+rug(subset(mirall.wide$value, mirall.wide$variable != "NTC"), col = "darkred", lwd = 1, cex = 1.5, side = 3)
+par(mfrow = c(1,1))#
+par(bty="n")#
+par(cex=1.0)#
+plot(mir$days, main = "enrollmemt", pch = 19, col = "black", type = "h", xlab = "dCTU6", ylab = "Density", xaxs = "r",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,0.1),yaxp = c(0,0.1,2), xlim = c(0,4000))#
+rug(mir$days, col = "darkred", lwd = 1, cex = 1.5, side = 3)
+par(mfrow = c(1,1))#
+par(bty="n")#
+par(cex=1.0)#
+plot(mir$days, main = "enrollmemt", pch = 19, col = "black", type = "S", xlab = "dCTU6", ylab = "Density", xaxs = "r",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,0.1),yaxp = c(0,0.1,2), xlim = c(0,400))#
+rug(mir$days, col = "darkred", lwd = 1, cex = 1.5, side = 3)
+mir <- read.delim("days.txt", header = TRUE, sep = "\t")#
+mir <- na.omit(mir)#
+mir <- drop.levels(mir)#
+nrow(mir)#
+summary(mir)
+par(mfrow = c(1,1))#
+par(bty="n")#
+par(cex=1.0)#
+plot(mir$days, mir$step, main = "enrollmemt", pch = 19, col = "black", type = "S", xlab = "dCTU6", ylab = "Density", xaxs = "r",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,0.1),yaxp = c(0,0.1,2), xlim = c(0,400))#
+rug(mir$days, col = "darkred", lwd = 1, cex = 1.5, side = 3)
+par(mfrow = c(1,1))#
+par(bty="n")#
+par(cex=1.0)#
+plot(mir$step, mir$days, main = "enrollmemt", pch = 19, col = "black", type = "S", xlab = "dCTU6", ylab = "Density", xaxs = "r",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,0.1),yaxp = c(0,0.1,2), xlim = c(0,400))#
+rug(mir$days, col = "darkred", lwd = 1, cex = 1.5, side = 3)
+par(mfrow = c(1,1))#
+par(bty="n")#
+par(cex=1.0)#
+xyplot(mir$step, mir$days, main = "enrollmemt", pch = 19, col = "black", type = "S", xlab = "dCTU6", ylab = "Density", xaxs = "r",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,0.1),yaxp = c(0,0.1,2), xlim = c(0,400))#
+rug(mir$days, col = "darkred", lwd = 1, cex = 1.5, side = 3)
+par(mfrow = c(1,1))#
+par(bty="n")#
+par(cex=1.0)#
+plot(mir$step, mir$days, main = "enrollmemt", pch = 19, col = "black", type = "S", xlab = "days since opening", ylab = "Density", xaxs = "r",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,100),yaxp = c(0,100,2), xlim = c(0,400))#
+rug(mir$days, col = "darkred", lwd = 1, cex = 1.5, side = 3)
+summary(mir)
+par(mfrow = c(1,1))#
+par(bty="n")#
+par(cex=1.0)#
+plot(mir$days, mir$step, main = "enrollmemt", pch = 19, col = "black", type = "S", xlab = "days since opening", ylab = "Density", xaxs = "r",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,100),yaxp = c(0,100,2), xlim = c(0,800))#
+rug(mir$days, col = "darkred", lwd = 1, cex = 1.5, side = 3)
+par(mfrow = c(1,1))#
+par(bty="n")#
+par(cex=1.0)#
+plot(mir$days, mir$step, main = "enrollmemt", pch = 19, col = "black", type = "S", xlab = "days since opening", ylab = "Density", xaxs = "r",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,100),yaxp = c(0,100,2), xlim = c(0,728))#
+rug(mir$days, col = "darkred", lwd = 1, cex = 1.5, side = 3)
+par(mfrow = c(1,1))#
+par(bty="n")#
+par(cex=1.0)#
+plot(mir$days, mir$step, main = "enrollmemt", pch = 19, col = "black", type = "S", xlab = "days since opening", ylab = "Density", xaxs = "r",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,100),yaxp = c(0,100,2), xlim = c(0,728), yaxp = c(0,800,8))#
+rug(mir$days, col = "darkred", lwd = 1, cex = 1.5, side = 3)
+par(mfrow = c(1,1))#
+par(bty="n")#
+par(cex=1.0)#
+plot(mir$days, mir$step, main = "enrollmemt", pch = 19, col = "black", type = "S", xlab = "days since opening", ylab = "Density", xaxs = "r",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,100),yaxp = c(0,100,2), xlim = c(0,750), yaxp = c(0,750,2))#
+rug(mir$days, col = "darkred", lwd = 1, cex = 1.5, side = 3)
+par(mfrow = c(1,1))#
+par(bty="n")#
+par(cex=1.0)#
+plot(mir$days, mir$step, main = "enrollmemt", pch = 19, col = "black", type = "S", xlab = "days since opening", ylab = "Density", xaxs = "r",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,100),yaxp = c(0,100,2), xlim = c(0,700), xaxp = c(0,700,2))#
+rug(mir$days, col = "darkred", lwd = 1, cex = 1.5, side = 3)
+par(mfrow = c(1,1))#
+par(bty="n")#
+par(cex=1.0)#
+plot(mir$days, mir$step, main = "enrollmemt", pch = 19, col = "black", type = "S", xlab = "days since opening", ylab = "Density", xaxs = "r",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,100),yaxp = c(0,100,2), xlim = c(0,728), xaxp = c(0,728,2))#
+rug(mir$days, col = "darkred", lwd = 1, cex = 1.5, side = 3)
+par(mfrow = c(1,1))#
+par(bty="l")#
+par(cex=1.5)#
+plot(mir$days, mir$step, main = "enrollmemt", pch = 19, col = "black", type = "S", xlab = "days since opening", ylab = "Density", xaxs = "r",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,100),yaxp = c(0,100,2), xlim = c(0,728), xaxp = c(0,728,2))#
+rug(mir$days, col = "darkred", lwd = 1, cex = 1.5, side = 3)
+par(mfrow = c(1,1))#
+par(bty="l")#
+par(cex=1.5)#
+plot(mir$days, mir$step, main = "enrollmemt", pch = 19, col = "black", type = "S", xlab = "days since opening", ylab = "No. of subjects enrolled", xaxs = "i",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,100),yaxp = c(0,100,2), xlim = c(0,728), xaxp = c(0,728,2))#
+rug(mir$days, col = "darkred", lwd = 1, cex = 1.5, side = 3)
+par(mfrow = c(1,1))#
+par(bty="l")#
+par(cex=1.5)#
+plot(mir$days, mir$step, main = "enrollmemt", pch = 19, col = "black", type = "S", xlab = "days since opening", ylab = "No. of subjects enrolled", xaxs = "i",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,100),yaxp = c(0,100,2), xlim = c(0,728), xaxp = c(0,728,2))#
+rug(mir$days, col = "darkred", lwd = 2, cex = 1.5, side = 2)
+par(mfrow = c(1,1))#
+par(bty="l")#
+par(cex=1.5)#
+plot(mir$days, mir$step, main = "enrollmemt", pch = 19, col = "black", type = "S", xlab = "days since opening", ylab = "No. of subjects enrolled", xaxs = "i",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,100),yaxp = c(0,100,2), xlim = c(0,728), xaxp = c(0,728,2))#
+rug(mir$days, col = "darkred", lwd = 2, cex = 1.5, side = 1)
+par(mfrow = c(1,1))#
+par(bty="l")#
+par(cex=1.5)#
+plot(mir$days, mir$step, main = "enrollmemt", pch = 19, col = "red", type = "S", xlab = "days since opening", ylab = "No. of subjects enrolled", xaxs = "i",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,100),yaxp = c(0,100,2), xlim = c(0,728), xaxp = c(0,728,2))#
+rug(mir$days, col = "black", lwd = 2, cex = 1.0, side = 1)
+par(mfrow = c(1,1))#
+par(bty="l")#
+par(cex=1.5)#
+plot(mir$days, mir$step, main = "enrollmemt", pch = 19, col = "red", type = "S", xlab = "days since opening", ylab = "No. of subjects enrolled", xaxs = "i",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,70),yaxp = c(0,70,2), xlim = c(0,728), xaxp = c(0,728,2))#
+rug(mir$days, col = "black", lwd = 2, cex = 1.0, side = 1)
+par(mfrow = c(1,1))#
+par(bty="l")#
+par(cex=1.5)#
+plot(mir$days, mir$step, main = "enrollmemt", pch = 19, col = "red", type = "S", xlab = "days since opening", ylab = "No. of subjects enrolled", xaxs = "i",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,70),yaxp = c(0,70,2), xlim = c(0,730), xaxp = c(0,730,2))#
+rug(mir$days, col = "black", lwd = 2, cex = 1.0, side = 1)
+par(mfrow = c(1,1))#
+par(bty="l")#
+par(cex=1.5)#
+plot(mir$days, mir$step, main = "Enrollment into AMC S001", pch = 19, col = "red", type = "S", xlab = "days since opening", ylab = "No. of subjects", xaxs = "i",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,70),yaxp = c(0,70,2), xlim = c(0,730), xaxp = c(0,730,2))#
+rug(mir$days, col = "black", lwd = 2, cex = 1.0, side = 1)
+par(mfrow = c(1,1))#
+par(bty="l")#
+par(cex=1.5)#
+plot(mir$days, mir$step, main = "Enrollment into AMC S001", pch = 19, col = "red", type = "S", xlab = "days since opening", ylab = "No. of subjects", xaxs = "i",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,70),yaxp = c(0,70,2), xlim = c(0,730), xaxp = c(0,730,4))#
+rug(mir$days, col = "black", lwd = 2, cex = 1.0, side = 1)
+par(mfrow = c(1,1))#
+par(bty="l")#
+par(cex=1.5)#
+plot(mir$days, mir$step, main = "Enrollment into AMC S001", pch = 19, col = "red", type = "S", xlab = "days since opening", ylab = "No. of subjects", xaxs = "i",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,70),yaxp = c(0,70,2), xlim = c(0,730), xaxp = c(0,730,5))#
+rug(mir$days, col = "black", lwd = 2, cex = 1.0, side = 1)
+par(mfrow = c(1,1))#
+par(bty="l")#
+par(cex=1.5)#
+plot(mir$days, mir$step, main = "Enrollment into AMC S001", pch = 19, col = "red", type = "S", xlab = "days since opening", ylab = "No. of subjects", xaxs = "i",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,70),yaxp = c(0,70,2), xlim = c(0,730), xaxp = c(0,730,6))#
+rug(mir$days, col = "black", lwd = 2, cex = 1.0, side = 1)
+par(mfrow = c(1,1))#
+par(bty="l")#
+par(cex=1.5)#
+plot(mir$days, mir$step, main = "Enrollment into AMC S001", pch = 19, col = "red", type = "S", xlab = "days since opening", ylab = "No. of subjects", xaxs = "i",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,70),yaxp = c(0,70,2), xlim = c(0,700), xaxp = c(0,700,7))#
+rug(mir$days, col = "black", lwd = 2, cex = 1.0, side = 1)
+abline(h = 15, col = "black")
+abline(h = 35, col = "black", lty = 3)
+par(mfrow = c(1,1))#
+par(bty="l")#
+par(cex=1.5)#
+plot(mir$days, mir$step, main = "Enrollment into AMC S001", pch = 19, col = "red", type = "S", xlab = "days since opening", ylab = "No. of subjects", xaxs = "i",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,70),yaxp = c(0,70,2), xlim = c(0,700), xaxp = c(0,700,7))#
+rug(mir$days, col = "black", lwd = 2, cex = 1.0, side = 1)#
+abline(h = 35, col = "black", lty = 3)#
+abline(v = 365, col = "black", lty = 3)
+par(mfrow = c(1,1))#
+par(bty="l")#
+par(cex=1.5)#
+plot(mir$days, mir$step, main = "Enrollment into AMC S001", pch = 19, col = "red", type = "S", xlab = "days since opening", ylab = "No. of subjects", xaxs = "i",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,70),yaxp = c(0,70,2), xlim = c(0,700), xaxp = c(0,700,7))#
+rug(mir$days, col = "black", lwd = 2, cex = 1.0, side = 1)#
+abline(h = 35, col = "black", lty = 3, lwd = 2)
+par(mfrow = c(1,1))#
+par(bty="l")#
+par(cex=1.5)#
+plot(mir$days, mir$step, main = "Enrollment into AMC S001", pch = 19, col = "red", type = "S", xlab = "days since opening", ylab = "No. of subjects", xaxs = "i",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,70),yaxp = c(0,70,2), xlim = c(0,700), xaxp = c(0,700,7))#
+rug(mir$days, col = "black", lwd = 2, cex = 1.0, side = 1)#
+abline(h = 35, col = "darkgray", lty = 3, lwd = 2)
+par(mfrow = c(1,1))#
+par(bty="l")#
+par(cex=1.5)#
+plot(mir$days, mir$step, main = "Enrollment into AMC S001", pch = 19, col = "red", type = "S", xlab = "days since opening", ylab = "No. of subjects", xaxs = "i",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,70),yaxp = c(0,70,2), xlim = c(0,700), xaxp = c(0,700,7))#
+rug(mir$days, col = "black", lwd = 2, cex = 1.0, side = 1)#
+abline(h = 35, col = "darkgray", lty = 2, lwd = 2)
+par(mfrow = c(1,1))#
+par(bty="l")#
+par(cex=1.5)#
+plot(mir$days, mir$step, main = "Enrollment into AMC S001", pch = 19, col = "red", type = "S", xlab = "days since opening", ylab = "No. of subjects", xaxs = "i",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,70),yaxp = c(0,70,2), xlim = c(0,700), xaxp = c(0,700,7))#
+rug(mir$days, col = "black", lwd = 2, cex = 1.0, side = 1)#
+abline(h = 35, col = "darkgray", lty = 4, lwd = 2)
+par(mfrow = c(1,1))#
+par(bty="l")#
+par(cex=1.5)#
+plot(mir$days, mir$step, main = "Enrollment into AMC S001", pch = 19, col = "red", type = "S", xlab = "days since opening", ylab = "No. of subjects", xaxs = "i",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,70),yaxp = c(0,70,2), xlim = c(0,700), xaxp = c(0,700,7))#
+rug(mir$days, col = "black", lwd = 4, cex = 1.0, side = 1)#
+abline(h = 35, col = "darkgray", lty = 4, lwd = 2)
+# -----------------------------------------------------------------------------------------------------#
+# enrollment#
+# -----------------------------------------------------------------------------------------------------#
+mir <- read.delim("days.txt", header = TRUE, sep = "\t")#
+mir <- na.omit(mir)#
+mir <- drop.levels(mir)#
+nrow(mir)#
+summary(mir)#
+#
+par(mfrow = c(1,1))#
+par(bty="l")#
+par(cex=1.5)#
+plot(mir$days, mir$step, main = "Enrollment into AMC S001", pch = 19, col = "red", type = "S", xlab = "days since opening", ylab = "No. of subjects", xaxs = "i",yaxs = "i", cex = 1.2, las = 1, lwd = 4, ylim = c(0,70),yaxp = c(0,70,2), xlim = c(0,700), xaxp = c(0,700,7))#
+rug(mir$days, col = "black", lwd = 3, cex = 1.0, side = 1)#
+abline(h = 35, col = "darkgray", lty = 4, lwd = 2)
