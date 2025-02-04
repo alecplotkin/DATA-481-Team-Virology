@@ -1,0 +1,276 @@
+---
+title: "01_make_data_PP"
+author: "Praveen Puviindran"
+date: "2025-01-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Describe the project
+This project is analyzing a synthetic lung cancer dataset containing numerous variables including patient demographics, tumor characteristics, treatment approaches, and biological data to hopefully be able to identify patterns or key factors that influence lung cancer prognosis and treatment efficacy.
+
+# Killer graph description
+What I believe would be considered a standalone "killer graph" for this project would be some sort of feature importance graph that incorporates all of the various measured variables and highlights the most influential ones in predicting cancer prognosis and treatment efficacy. This could be in combination with an overlayed density map or bar graph that shows the proportion of influence a variable has on the outcome.
+
+```{r, echo=FALSE}
+# Load necessary libraries
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(DT)
+library(GGally)
+library(tibble)
+library(gridExtra)
+```
+
+```{r}
+# Load the data
+file_path <- "/Users/praveenpuviindran/Documents/Current Course Material/DATA481S25/lung_cancer_data.csv"
+lung_cancer_data <- read.csv(file_path)
+
+# Preview the data
+head(lung_cancer_data)
+
+# Summary of the dataset
+summary(lung_cancer_data)
+
+# Check for missing values
+tibble(Missing_Count = colSums(is.na(lung_cancer_data)))
+```
+
+### Continuous Variable Distributions
+```{r}
+# Plot distributions of continuous variables
+continuous_vars <- c("Age", "Tumor_Size_mm", "Survival_Months")
+plots <- list()
+for (var in continuous_vars) {
+  plots[[var]] <- ggplot(lung_cancer_data, aes_string(x = var)) +
+    geom_histogram(bins = 30, fill = "blue", color = "black", alpha = 0.7) +
+    theme_minimal() +
+    labs(title = paste("Distribution of", var), x = var, y = "Count")
+}
+grid.arrange(grobs = plots, ncol = 2)
+```
+
+### Relationships Between Variables
+```{r}
+# Scatterplots for numerical relationships
+scatter_plot <- ggplot(lung_cancer_data, aes(x = Tumor_Size_mm, y = Survival_Months)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", color = "red", se = FALSE) +
+  theme_minimal() +
+  labs(title = "Tumor Size vs Survival Months", x = "Tumor Size (mm)", y = "Survival Months")
+
+scatter_plot
+```
+
+### Boxplots for Survival by Categorical Variables
+```{r}
+# Boxplots for Survival_Months by categorical variables
+boxplot_vars <- c("Stage", "Treatment", "Tumor_Location")
+plots <- list()
+for (var in boxplot_vars) {
+  plots[[var]] <- ggplot(lung_cancer_data, aes_string(x = var, y = "Survival_Months", fill = var)) +
+    geom_boxplot() +
+    theme_minimal() +
+    labs(title = paste("Survival Months by", var), x = var, y = "Survival Months") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+}
+grid.arrange(grobs = plots, ncol = 2)
+```
+
+### Pair Plot for Numerical Variables
+```{r}
+# Pair plot for numerical variables
+continuous_subset <- lung_cancer_data %>% select(Age, Tumor_Size_mm, Survival_Months)
+ggpairs(continuous_subset)
+```
+
+### Correlation Analysis
+```{r}
+# Filter only numeric columns and exclude irrelevant or ID columns
+correlation_data <- lung_cancer_data %>%
+  select_if(is.numeric)
+
+# Calculate correlation matrix
+correlation_matrix <- round(cor(correlation_data, use = "complete.obs"), 2)
+
+# Melt the correlation matrix for visualization
+melted_correlation <- melt(correlation_matrix)
+
+# Recreate the heatmap with clearer scales
+heatmap_plot <- ggplot(melted_correlation, aes(Var1, Var2, fill = value)) +
+  geom_tile(color = "white") +
+  scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0, limit = c(-1, 1)) +
+  theme_minimal() +
+  labs(title = "Correlation Heatmap", x = "", y = "") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
+
+heatmap_plot
+```
+
+# Killer Graph
+The "killer graph" for this project would be a hybrid visualization combining a feature importance chart and Kaplan-Meier survival curves. The feature importance chart would rank the key factors, such as cancer stage, tumor size, treatment type, and smoking history, based on their influence on lung cancer prognosis and survival outcomes, as determined by a machine learning model. The Kaplan-Meier survival curves would provide deeper insights by showing how survival probabilities change over time for specific groups, such as patients at different cancer stages or undergoing different treatments. By integrating these two elements, the graph would highlight both the statistical importance of each factor and how these factors translate into actual survival trends, offering a comprehensive view of what drives patient outcomes.
+
+# Research Question
+What are the key factors influencing survival months in lung cancer patients, and how do these factors vary across different stages and treatment types?
+
+```{r}
+# Filter data for each Tumor_Location and create separate plots
+tumor_locations <- unique(lung_cancer_data$Tumor_Location)
+
+plots <- list()
+
+for (location in tumor_locations) {
+  plot <- ggplot(lung_cancer_data %>% filter(Tumor_Location == location),
+                 aes(x = Stage, y = Survival_Months, fill = Treatment)) +
+    geom_boxplot() +
+    theme_minimal() +
+    labs(title = paste("Survival Months by Stage and Treatment -", location),
+         x = "Stage", y = "Survival Months", fill = "Treatment")
+  
+  plots[[location]] <- plot
+}
+
+# Print each plot
+for (location in tumor_locations) {
+  print(plots[[location]])
+}
+
+```
+
+```{r}
+# Violin plot for Survival Months by Gender
+ggplot(lung_cancer_data, aes(x = Gender, y = Survival_Months, fill = Gender)) +
+  geom_violin(trim = FALSE, alpha = 0.6) +
+  geom_boxplot(width = 0.1, fill = "white") +
+  theme_minimal() +
+  labs(title = "Survival Months by Gender", x = "Gender", y = "Survival Months")
+
+# Boxplot for Survival Months by Ethnicity
+ggplot(lung_cancer_data, aes(x = Ethnicity, y = Survival_Months, fill = Ethnicity)) +
+  geom_boxplot(alpha = 0.7) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "Survival Months by Ethnicity", x = "Ethnicity", y = "Survival Months")
+```
+
+```{r}
+# Calculate median survival months by Stage and Treatment
+treatment_summary <- lung_cancer_data %>%
+  group_by(Stage, Treatment) %>%
+  summarise(
+    Median_Survival = median(Survival_Months, na.rm = TRUE),
+    Mean_Survival = mean(Survival_Months, na.rm = TRUE),
+    Count = n()
+  )
+
+# Print summary table
+print(treatment_summary)
+
+# Plot median survival by Treatment and Stage
+ggplot(treatment_summary, aes(x = Treatment, y = Median_Survival, fill = Stage)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  theme_minimal() +
+  labs(
+    title = "Median Survival Months by Treatment and Stage",
+    x = "Treatment", y = "Median Survival Months", fill = "Stage"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r}
+# Select all chemical/biological variables
+bio_vars <- c("Hemoglobin_Level", "White_Blood_Cell_Count", "Platelet_Count", 
+              "Albumin_Level", "Alkaline_Phosphatase_Level", "Alanine_Aminotransferase_Level", 
+              "Aspartate_Aminotransferase_Level", "Creatinine_Level", "LDH_Level",
+              "Calcium_Level", "Phosphorus_Level", "Glucose_Level", "Potassium_Level", 
+              "Sodium_Level")
+
+# Summary statistics
+summary(lung_cancer_data[bio_vars])
+```
+
+```{r}
+# Compute correlation matrix for biological markers
+bio_corr_matrix <- cor(lung_cancer_data[bio_vars], use = "complete.obs")
+
+# Convert to long format for heatmap
+library(reshape2)
+melted_corr <- melt(bio_corr_matrix)
+
+# Heatmap visualization
+ggplot(melted_corr, aes(Var1, Var2, fill = value)) +
+  geom_tile(color = "white") +
+  scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0) +
+  theme_minimal() +
+  labs(title = "Correlation Heatmap of Biological Markers", x = "", y = "") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
+```
+
+```{r}
+# Histogram for major biomarkers
+p1 <- ggplot(lung_cancer_data, aes(x = Hemoglobin_Level)) +
+  geom_histogram(fill = "blue", color = "black", bins = 30, alpha = 0.7) +
+  theme_minimal() +
+  labs(title = "Distribution of Hemoglobin Levels", x = "Hemoglobin Level", y = "Count")
+
+p2 <- ggplot(lung_cancer_data, aes(x = White_Blood_Cell_Count)) +
+  geom_histogram(fill = "red", color = "black", bins = 30, alpha = 0.7) +
+  theme_minimal() +
+  labs(title = "Distribution of White Blood Cell Count", x = "WBC Count", y = "Count")
+
+p3 <- ggplot(lung_cancer_data, aes(x = Albumin_Level)) +
+  geom_histogram(fill = "green", color = "black", bins = 30, alpha = 0.7) +
+  theme_minimal() +
+  labs(title = "Distribution of Albumin Levels", x = "Albumin Level", y = "Count")
+
+grid.arrange(p1, p2, p3, ncol = 2)
+```
+
+```{r}
+# Boxplots for selected biomarkers across different tumor stages
+p1 <- ggplot(lung_cancer_data, aes(x = Stage, y = Hemoglobin_Level, fill = Stage)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Hemoglobin Levels by Tumor Stage", x = "Stage", y = "Hemoglobin Level")
+
+p2 <- ggplot(lung_cancer_data, aes(x = Stage, y = White_Blood_Cell_Count, fill = Stage)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "White Blood Cell Count by Tumor Stage", x = "Stage", y = "WBC Count")
+
+p3 <- ggplot(lung_cancer_data, aes(x = Stage, y = Creatinine_Level, fill = Stage)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Creatinine Levels by Tumor Stage", x = "Stage", y = "Creatinine Level")
+
+grid.arrange(p1, p2, p3, ncol = 2)
+```
+
+```{r}
+# Scatterplots for biomarker vs survival months
+p1 <- ggplot(lung_cancer_data, aes(x = Hemoglobin_Level, y = Survival_Months)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", color = "red") +
+  theme_minimal() +
+  labs(title = "Hemoglobin Level vs Survival Months", x = "Hemoglobin Level", y = "Survival Months")
+
+p2 <- ggplot(lung_cancer_data, aes(x = White_Blood_Cell_Count, y = Survival_Months)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", color = "red") +
+  theme_minimal() +
+  labs(title = "WBC Count vs Survival Months", x = "WBC Count", y = "Survival Months")
+
+p3 <- ggplot(lung_cancer_data, aes(x = Glucose_Level, y = Survival_Months)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", color = "red") +
+  theme_minimal() +
+  labs(title = "Glucose Level vs Survival Months", x = "Glucose Level", y = "Survival Months")
+
+grid.arrange(p1, p2, p3, ncol = 2)
+```
+
