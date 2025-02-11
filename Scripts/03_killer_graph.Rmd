@@ -6,8 +6,6 @@ output: html_notebook
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
-#library(dplyr)
-#library(tidyr)
 library(FactoMineR)
 library(factoextra)
 library(devtools)
@@ -16,13 +14,17 @@ library(PerformanceAnalytics)
 library(Rtsne)
 library(umap)
 library(reshape2)
+library(ggcorrplot)
+library(polycor)
+library(bigmemory)
 ```
+#Introduction Section:
 
 # Description of dataset 
 This synthetic dataset simulates real-world lung cancer cases, including demographics, medical history, treatments, and outcomes. It supports predictive modeling, prognosis assessment, and treatment analysis in research.
 
 # Question of Interest
-How can patient demographics, medical history, tumor characteristics, and treatment details predict the stage of lung cancer at diagnosis? And how patients cluster by stage?
+How can patient age, medical history and tumor characteristics,predict the stage of lung cancer at diagnosis? And how patients cluster by stage?
 
 ```{r}
 cnrdata <- read.csv("lung_cancer_data.csv")
@@ -45,6 +47,18 @@ summary(numeric_data)
 cor.mat = cor(numeric_data, use = "complete.obs")
 
 ```
+
+```{r}
+   ggplot(cnrdata, aes(x = Age, y = Stage, color = Treatment)) +
+        geom_jitter(alpha = 0.6) +
+        labs(title = "Age vs. Tumor Stage",
+             x = "Patient Age",
+             y = "Tumor Stage",
+             color = "Treatment") +
+        theme_minimal()
+```
+
+
 
 ```{r}
 # Heat map showing correlation between variables
@@ -73,10 +87,10 @@ eigenvalues <- res.pca$eig
 head(eigenvalues[, 1:2])
 ```
 ```{r}
-#pca_result <- PCA(numeric_data, graph = FALSE)
+pca_result <- PCA(numeric_data, graph = FALSE)
 fviz_eig(pca_result, addlabels = TRUE, ylim = c(0, 50))
 ```
-Figure 1: Scree plot displaying the percentage of variance explained by each principal component. The gradual decline in variance indicates that no single component dominates the dataset, suggesting that multiple components contribute meaningfully to the overall variance. This plot helps determine the number of components to retain for further analysis.
+
 ```{r}
 cnrdata$Stage <- as.factor(cnrdata$Stage)
 numeric_data <- na.omit(numeric_data)
@@ -99,9 +113,27 @@ fviz_pca_ind(
     legend.text = element_text(size = 10)
   )
 ```
-Figure 2: Principal Component Analysis (PCA) plot showing the distribution of individuals across the first two principal components. Points are colored by cancer stage (Stage I-IV), highlighting the clustering patterns based on the input variables such as age, performance status, and tumor size.
+
+#Results Section: 
+
+#Key findings:
+1.**Age Distribution Across Stages:**
+- Exploratory analysis showed that the age of patients is widely distributed across all tumor stages, with no significant clustering or trend of older patients in higher stages.
+
+2. **Principal Component Analysis (PCA):**
+   - Based on the observation that there is no clear clustering in the PCA plot, the variables used are insufficient to differentiate between stages. Adding new variables, such as genetic markers or imaging features, could improve the ability to separate lung cancer stages. This should result in clearer clustering when using PCA or similar methods.
+
+3. **Scree Plot Analysis:**
+   - The scree plot displays the percentage of variance explained by each principal component. The gradual decline in variance indicates that no single component dominates the data set, suggesting that multiple components contribute meaningfully to the overall variance. This plot helps determine the number of components to retain for further analysis.
 
 
 #Discussion:
-Based on the observation that there is no clear clustering in the PCA plot and the variables used are insufficient to differentiate between stages. Adding new variables, like genetic markers or imaging features, will make it easier to separate lung cancer stages. This should result in clearer clustering when using PCA or similar methods
+## Testable Hypothesis:
+Factors beyond smoking history and age, such as genetic mutations or environmental exposures, are stronger predictors of lung cancer tumor stage at diagnosis.
+
+#To test this hypothesis, future research could:
+- Incorporate data on genetic markers or environmental pollutants.
+- Use multivariate regression or machine learning models to assess the combined impact of smoking, age, genetics, and environment on tumor stage.
+
+
 
