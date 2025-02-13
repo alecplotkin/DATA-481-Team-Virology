@@ -1,0 +1,162 @@
+"type","Date","Array","Primer","Type","Gene","Concat","Good","Plate","X629","X731","X1314","X1700","X2572","X2741","X2858","X2910","X2969","X3544","X3937","X4428","X4678","X5485","X7121","X8239"
+"CT",112511,"KSHV dream array","ACTIN","human","ACTIN","KSHV dream arrayACTIN","bad","PP1",26.95,25.88,24.83,27.14,25.33,26.75,24.88,24.15,24.74,27.27,25.87,32.84,27.25,26.98,27.27,24.69
+"CT",112511,"KSHV dream array","ACTIN (2)","human","actin","KSHV dream arrayACTIN (2)","good","PP2",26.74,25.9,24.47,27.31,25.55,26.59,24.99,23.86,24.85,27.19,25.81,32.58,26.84,27.42,27.4,24.71
+"CT",112511,"KSHV dream array","B2M","human","B2M","KSHV dream arrayB2M","bad","PP1",24.37,22.55,NA,24.45,21.55,23.28,22.82,20.99,22.41,24.83,24.32,28.77,24.32,24.74,24.27,22.64
+"CT",112511,"KSHV dream array","B2M (2)","human","b2m","KSHV dream arrayB2M (2)","good","PP2",24.22,22.39,22.15,23.97,21.72,23.01,22.45,20.96,22.28,24.66,24.22,28.54,23.96,24.1,23.98,22.57
+"CT",112511,"KSHV dream array","BACT","human","BACT","KSHV dream arrayBACT","bad","PP1",NA,23.64,23.21,26.54,23.91,24.86,23.93,22.77,22.85,25.37,23.77,29.68,25.63,25.41,25.43,22.95
+"CT",112511,"KSHV dream array","BACT (2)","human","bact","KSHV dream arrayBACT (2)","good","PP2",24.43,23.43,22.26,24.34,22.93,23.68,22.94,21.42,22.43,24.89,23.57,NA,24.83,NA,24.69,22.89
+"CT",112511,"KSHV dream array","GAPDH (2)","human","GAPDH (2)","KSHV dream arrayGAPDH (2)","bad","PP2",27,25.77,25.66,26.85,23.89,24.72,24.75,24.01,25.3,27.06,26.24,30.8,26.97,26.54,27.7,24.57
+"CT",112511,"KSHV dream array","HPRT","human","HPRT","KSHV dream arrayHPRT","bad","PP1",32,30.96,30.5,32.01,30.33,30.97,30.57,29.82,30.64,32.93,31.55,NA,32.68,32.88,32.86,30.53
+"CT",112511,"KSHV dream array","HPRT (2)","human","HPRT (2)","KSHV dream arrayHPRT (2)","bad","PP2",32.19,31.27,30.36,32.5,29.94,30.78,30.28,29.72,30.41,32.83,31.05,34.86,32.21,32.55,32.78,30.2
+"CT",112511,"KSHV dream array","K1 (348)","KSHV","K1","KSHV dream arrayK1 (348)","good","PP1",NA,38.96,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","K1 (622)","KSHV","K1","KSHV dream arrayK1 (622)","good","PP1",NA,NA,NA,NA,NA,NA,NA,46.09,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","K14 (128145)","KSHV","K14","KSHV dream arrayK14 (128145)","good","PP2",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","K14 (128651)","KSHV","K14","KSHV dream arrayK14 (128651)","good","PP2",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,36.01
+"CT",112511,"KSHV dream array","K14 or ORF74 (129773)","KSHV","K14 or ORF74","KSHV dream arrayK14 or ORF74 (129773)","good","PP2",NA,NA,33.22,NA,NA,NA,35.54,NA,34.95,34.56,NA,NA,NA,NA,NA,34.99
+"CT",112511,"KSHV dream array","K14 or ORF74 (129945)","KSHV","K14 or ORF74","KSHV dream arrayK14 or ORF74 (129945)","good","PP2",NA,NA,34.11,NA,NA,NA,NA,NA,36.38,35.82,35.12,NA,NA,NA,NA,34.13
+"CT",112511,"KSHV dream array","K14 or ORF74 (130126)","KSHV","K14 or ORF74","KSHV dream arrayK14 or ORF74 (130126)","good","PP2",NA,NA,35.71,54.1,NA,52.27,NA,NA,NA,NA,NA,NA,36.06,NA,NA,NA
+"CT",112511,"KSHV dream array","K15 (130749)","KSHV","K15","KSHV dream arrayK15 (130749)","good","PP2",31.89,30.89,29.55,34.95,32.25,31.99,32.29,31.02,30.27,29.97,31.57,NA,31.58,31.22,NA,29.35
+"CT",112511,"KSHV dream array","K15 (131458)","KSHV","K15","KSHV dream arrayK15 (131458)","good","PP2",32.68,33.07,29.43,35.19,34.53,32.59,31.83,30.65,30.34,29.86,32.87,NA,32.19,31.24,35.14,30.57
+"CT",112511,"KSHV dream array","K2 or Orf2 (17821)","KSHV","K2 or Orf2","KSHV dream arrayK2 or Orf2 (17821)","good","PP1",36.47,33.69,34.31,40.55,NA,36.44,35.52,32.53,31.54,32,33.68,NA,34.99,32.98,36.98,32.41
+"CT",112511,"KSHV dream array","K3 (18883)","KSHV","K3","KSHV dream arrayK3 (18883)","good","PP1",36.18,NA,NA,NA,NA,37.09,37.29,36.09,36.04,NA,NA,NA,NA,NA,NA,35.83
+"CT",112511,"KSHV dream array","K3 (19081)","KSHV","K3","KSHV dream arrayK3 (19081)","good","PP1",NA,NA,NA,NA,NA,36.04,36.77,NA,NA,36.31,NA,NA,NA,37.93,NA,NA
+"CT",112511,"KSHV dream array","K3 (19577)","KSHV","K3","KSHV dream arrayK3 (19577)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,38.68,NA,NA,NA,36.65,NA,51.44
+"CT",112511,"KSHV dream array","K4 (21778)","KSHV","K4","KSHV dream arrayK4 (21778)","good","PP1",34.76,NA,NA,NA,NA,39.17,36.48,NA,NA,35.55,NA,NA,NA,35.82,NA,NA
+"CT",112511,"KSHV dream array","K5 (26200,2)","KSHV","K5","KSHV dream arrayK5 (26200,2)","good","PP2",36.96,33.94,28.24,35.13,46.98,33.84,31.88,33.49,35.47,34.42,45.99,46.38,34.61,33.28,47.78,32.58
+"CT",112511,"KSHV dream array","K5 (26200)","KSHV","K5","KSHV dream arrayK5 (26200)","good","PP1",NA,35.25,30.51,43.14,37.6,38.55,35.7,34.64,34.66,33.57,36.67,NA,35.4,36.82,NA,34.9
+"CT",112511,"KSHV dream array","K7 (28624)","KSHV","K7","KSHV dream arrayK7 (28624)","good","PP1",33.7,NA,31.03,39.93,NA,NA,NA,NA,35.19,34,34.91,NA,NA,34.29,NA,NA
+"CT",112511,"KSHV dream array","K7 (28694)","KSHV","K7","KSHV dream arrayK7 (28694)","good","PP1",32.03,34.93,27.97,32.09,32.5,31.29,31.33,31.99,32.85,29.38,NA,NA,32.67,29.05,35.91,28.53
+"CT",112511,"KSHV dream array","Orf 10 or 4,6,7,8,9 (15008)","KSHV","Orf 10 or 4,6,7,8,9","KSHV dream arrayOrf 10 or 4,6,7,8,9 (15008)","good","PP1",NA,NA,NA,NA,36.54,37.88,38.56,NA,NA,35.31,NA,NA,37.92,NA,NA,43.5
+"CT",112511,"KSHV dream array","Orf 10 or 4,6,7,8,9 (15244)","KSHV","Orf 10 or 4,6,7,8,9","KSHV dream arrayOrf 10 or 4,6,7,8,9 (15244)","good","PP1",NA,NA,NA,NA,NA,NA,36.02,36.64,34.33,36.92,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf 10 or 4,6,7,8,9 (15288)","KSHV","Orf 10 or 4,6,7,8,9","KSHV dream arrayOrf 10 or 4,6,7,8,9 (15288)","good","PP1",52.91,NA,35.06,NA,NA,NA,NA,NA,NA,36.81,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf 11 or 10,9,8,7,6,4 (16677)","KSHV","Orf 11 or 10,9,8,7,6,4","KSHV dream arrayOrf 11 or 10,9,8,7,6,4 (16677)","good","PP1",35.21,NA,32.95,35.79,NA,34.8,34.98,32.03,33.32,32.64,NA,NA,49.59,34.68,NA,34.49
+"CT",112511,"KSHV dream array","Orf 22 or 21 (38336)","KSHV","Orf 22 or 21","KSHV dream arrayOrf 22 or 21 (38336)","good","PP1",43.02,NA,37.76,NA,NA,NA,NA,NA,NA,38.72,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf 22 or 21 (38857)","KSHV","Orf 22 or 21","KSHV dream arrayOrf 22 or 21 (38857)","good","PP1",37.59,NA,NA,NA,NA,NA,NA,NA,NA,36.16,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf 34 or Orf35 (55680,2)","KSHV","Orf 34 or Orf35","KSHV dream arrayOrf 34 or Orf35 (55680,2)","good","PP2",NA,NA,NA,NA,NA,35.22,NA,NA,NA,NA,NA,NA,NA,NA,NA,32.95
+"CT",112511,"KSHV dream array","Orf 34 or Orf35 (55680)","KSHV","Orf 34 or Orf35","KSHV dream arrayOrf 34 or Orf35 (55680)","good","PP1",NA,NA,34.24,NA,NA,36.03,35.18,46.81,NA,35.78,NA,NA,NA,NA,NA,34.41
+"CT",112511,"KSHV dream array","Orf 36 or Orf34 or 35 (56709,2)","KSHV","Orf 36 or Orf34 or 35","KSHV dream arrayOrf 36 or Orf34 or 35 (56709,2)","good","PP2",NA,54.46,NA,NA,NA,41.95,49.28,41.23,NA,NA,37.26,NA,45.15,NA,NA,37.94
+"CT",112511,"KSHV dream array","Orf 36 or Orf34 or 35 (56709)","KSHV","Orf 36 or Orf34 or 35","KSHV dream arrayOrf 36 or Orf34 or 35 (56709)","good","PP1",NA,57.82,40.14,40.46,NA,NA,41.12,47.85,NA,NA,38.71,46.94,NA,NA,NA,33.9
+"CT",112511,"KSHV dream array","ORF16 (30265)","KSHV","ORF16","KSHV dream arrayORF16 (30265)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","ORF16 (30403)","KSHV","ORF16","KSHV dream arrayORF16 (30403)","good","PP1",NA,NA,NA,NA,NA,NA,36.01,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","ORF17 (31829)","KSHV","ORF17","KSHV dream arrayORF17 (31829)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,39.82,35.49,NA,NA
+"CT",112511,"KSHV dream array","ORF17 (32510)","KSHV","ORF17","KSHV dream arrayORF17 (32510)","good","PP1",35.18,NA,NA,NA,NA,44.75,NA,NA,NA,NA,49.09,NA,NA,NA,NA,33.93
+"CT",112511,"KSHV dream array","ORF17 or Orf17.5 (31509)","KSHV","ORF17 or Orf17.5","KSHV dream arrayORF17 or Orf17.5 (31509)","good","PP1",NA,NA,38.93,NA,NA,37.46,39.63,NA,NA,38.57,NA,NA,NA,38.81,NA,34.93
+"CT",112511,"KSHV dream array","ORF18 (32935)","KSHV","ORF18 ","KSHV dream arrayORF18 (32935)","good","PP1",NA,NA,32.95,NA,NA,NA,NA,NA,NA,36.87,NA,NA,NA,38.17,NA,33.7
+"CT",112511,"KSHV dream array","Orf18 or 20 or 19 (33405)","KSHV","Orf18 or 20 or 19","KSHV dream arrayOrf18 or 20 or 19 (33405)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf20 or Orf19 (34089)","KSHV","Orf20 or Orf19","KSHV dream arrayOrf20 or Orf19 (34089)","good","PP1",38.84,38.26,33.96,39.94,48.16,40.78,38.72,43.83,47.11,44.75,42.96,37.63,43.71,37.07,38.88,34.98
+"CT",112511,"KSHV dream array","Orf20 or Orf19 (34848)","KSHV","Orf20 or Orf19","KSHV dream arrayOrf20 or Orf19 (34848)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,35.32
+"CT",112511,"KSHV dream array","Orf20 or Orf19 (35199)","KSHV","Orf20 or Orf19","KSHV dream arrayOrf20 or Orf19 (35199)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf20 or Orf19 (35440)","KSHV","Orf20 or Orf19","KSHV dream arrayOrf20 or Orf19 (35440)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf21 (36102,2)","KSHV","Orf21","KSHV dream arrayOrf21 (36102,2)","good","PP2",43.16,44.02,55.87,42.2,42.21,41.25,39.63,41.89,39.56,42.8,47.17,NA,42.86,44.47,46.31,42.6
+"CT",112511,"KSHV dream array","Orf21 (36102)","KSHV","Orf21","KSHV dream arrayOrf21 (36102)","good","PP1",41.43,42.84,NA,41.85,44.55,47.97,44.99,42.03,43.68,47.94,44.89,52.07,56.94,44.62,45.98,42.14
+"CT",112511,"KSHV dream array","Orf21 (36500,2)","KSHV","Orf21","KSHV dream arrayOrf21 (36500,2)","good","PP2",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf21 (36500)","KSHV","Orf21","KSHV dream arrayOrf21 (36500)","good","PP1",37.88,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf23 or 24 (39603)","KSHV","Orf23 or 24","KSHV dream arrayOrf23 or 24 (39603)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,32.91
+"CT",112511,"KSHV dream array","Orf23 or 24 (39786)","KSHV","Orf23 or 24","KSHV dream arrayOrf23 or 24 (39786)","good","PP1",NA,NA,NA,NA,NA,35.83,NA,NA,NA,NA,NA,NA,NA,NA,NA,33.9
+"CT",112511,"KSHV dream array","Orf24 (41283)","KSHV","Orf24","KSHV dream arrayOrf24 (41283)","good","PP1",NA,NA,NA,NA,38.42,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,36.7
+"CT",112511,"KSHV dream array","Orf24 (41630)","KSHV","Orf24","KSHV dream arrayOrf24 (41630)","good","PP1",NA,NA,NA,NA,NA,NA,NA,41.4,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf25 (45767)","KSHV","Orf25","KSHV dream arrayOrf25 (45767)","good","PP1",NA,NA,NA,NA,NA,NA,39.94,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf25 (46047)","KSHV","Orf25","KSHV dream arrayOrf25 (46047)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf26 or Orf25 (47305)","KSHV","Orf26 or Orf25","KSHV dream arrayOrf26 or Orf25 (47305)","good","PP1",36.11,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf27 or 26 or 25 (48071)","KSHV","Orf27 or 26 or 25","KSHV dream arrayOrf27 or 26 or 25 (48071)","good","PP1",NA,NA,NA,44.71,NA,NA,NA,NA,NA,42.79,NA,NA,NA,NA,NA,43.18
+"CT",112511,"KSHV dream array","Orf27 or 26 or 25 (48265)","KSHV","Orf27 or 26 or 25","KSHV dream arrayOrf27 or 26 or 25 (48265)","good","PP1",NA,NA,NA,NA,37.67,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf29 (49612)","KSHV","Orf29","KSHV dream arrayOrf29 (49612)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,35.57
+"CT",112511,"KSHV dream array","Orf29 (49613)","KSHV","Orf29","KSHV dream arrayOrf29 (49613)","good","PP1",NA,NA,38.63,NA,36.39,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,35.28
+"CT",112511,"KSHV dream array","Orf29 (54355)","KSHV","Orf29","KSHV dream arrayOrf29 (54355)","good","PP1",NA,NA,45.22,NA,38.2,53.52,51.07,52.64,39.11,52.95,45.37,NA,44.15,NA,48.93,NA
+"CT",112511,"KSHV dream array","Orf30 or Orf29 (50891)","KSHV","Orf30 or Orf29","KSHV dream arrayOrf30 or Orf29 (50891)","good","PP1",NA,35.52,NA,NA,NA,NA,NA,35.7,36.49,NA,NA,NA,NA,NA,35.89,35.07
+"CT",112511,"KSHV dream array","Orf30 or Orf29 or 31 (50984)","KSHV","Orf30 or Orf29 or 31","KSHV dream arrayOrf30 or Orf29 or 31 (50984)","good","PP1",NA,NA,NA,NA,NA,37,36.25,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf30 or Orf29 or 31 (51123)","KSHV","Orf30 or Orf29 or 31","KSHV dream arrayOrf30 or Orf29 or 31 (51123)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,37.01
+"CT",112511,"KSHV dream array","Orf32 or 29,30,31 (51996)","KSHV","Orf32 or 29,30,31","KSHV dream arrayOrf32 or 29,30,31 (51996)","good","PP1",NA,NA,35.39,NA,NA,NA,NA,NA,NA,NA,NA,NA,36.93,NA,NA,36.33
+"CT",112511,"KSHV dream array","Orf32 or 29,30,31 (52828)","KSHV","Orf32 or 29,30,31","KSHV dream arrayOrf32 or 29,30,31 (52828)","good","PP1",NA,NA,NA,NA,35.02,NA,NA,36.21,NA,34.4,NA,NA,NA,35.75,NA,33.44
+"CT",112511,"KSHV dream array","Orf33 or 29,30,31,32 (53424)","KSHV","Orf33 or 29,30,31,32","KSHV dream arrayOrf33 or 29,30,31,32 (53424)","good","PP1",NA,NA,36.9,36.53,NA,37.51,36.8,NA,NA,38.87,38.62,NA,NA,NA,NA,34.24
+"CT",112511,"KSHV dream array","Orf34 (55359,2)","KSHV","Orf34","KSHV dream arrayOrf34 (55359,2)","good","PP2",NA,NA,NA,NA,NA,NA,38.06,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf34 (55359)","KSHV","Orf34","KSHV dream arrayOrf34 (55359)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf37 or 34,35,36 (57765,2)","KSHV","Orf37 or 34,35,36","KSHV dream arrayOrf37 or 34,35,36 (57765,2)","good","PP2",NA,NA,36.99,39.14,37.12,36.96,36.34,36.31,NA,37.05,NA,NA,NA,37.88,NA,34.57
+"CT",112511,"KSHV dream array","Orf37 or 34,35,36 (57765)","KSHV","Orf37 or 34,35,36","KSHV dream arrayOrf37 or 34,35,36 (57765)","good","PP1",37.98,NA,35.59,NA,36.74,NA,NA,48.48,NA,37,NA,NA,NA,NA,NA,36.54
+"CT",112511,"KSHV dream array","Orf37 or 34,35,36 (58237)","KSHV","Orf37 or 34,35,36","KSHV dream arrayOrf37 or 34,35,36 (58237)","good","PP1",34.96,NA,34.62,NA,34.06,37.23,35.92,34.48,NA,33.7,NA,NA,NA,33.42,NA,32.58
+"CT",112511,"KSHV dream array","Orf39 (60036)","KSHV","Orf39","KSHV dream arrayOrf39 (60036)","good","PP1",NA,NA,NA,NA,37.22,38.36,NA,NA,NA,NA,NA,NA,NA,NA,NA,32.96
+"CT",112511,"KSHV dream array","ORF4 (2109)","KSHV","ORF4","KSHV dream arrayORF4 (2109)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","ORF4 (2360)","KSHV","ORF4","KSHV dream arrayORF4 (2360)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","ORF4 (2545)","KSHV","ORF4","KSHV dream arrayORF4 (2545)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf40 (60631)","KSHV","ORF40","KSHV dream arrayOrf40 (60631)","good","PP1",NA,NA,NA,NA,NA,NA,NA,35.65,NA,54.8,54.88,NA,NA,NA,NA,32.92
+"CT",112511,"KSHV dream array","Orf40 (61476)","KSHV","ORF40","KSHV dream arrayOrf40 (61476)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,34.96
+"CT",112511,"KSHV dream array","Orf40 (62028)","KSHV","ORF40","KSHV dream arrayOrf40 (62028)","good","PP1",NA,NA,35.96,NA,NA,NA,35.97,NA,NA,NA,NA,NA,NA,NA,NA,33.56
+"CT",112511,"KSHV dream array","Orf40 (62161)","KSHV","ORF40","KSHV dream arrayOrf40 (62161)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,37.33,NA,NA,NA,NA,NA,NA,36.88
+"CT",112511,"KSHV dream array","Orf42 or Orf43 (62906)","KSHV","Orf42 or Orf43","KSHV dream arrayOrf42 or Orf43 (62906)","good","PP1",38.11,NA,39.45,NA,38.11,NA,39.78,NA,NA,NA,NA,NA,37.96,NA,NA,35.62
+"CT",112511,"KSHV dream array","Orf43 (63567)","KSHV","Orf43","KSHV dream arrayOrf43 (63567)","good","PP2",54.94,NA,36.45,NA,NA,NA,NA,NA,NA,NA,NA,NA,36.69,NA,NA,33.62
+"CT",112511,"KSHV dream array","Orf43 (63853)","KSHV","Orf43","KSHV dream arrayOrf43 (63853)","good","PP2",NA,NA,34.95,NA,NA,NA,NA,34.89,NA,NA,NA,NA,NA,NA,NA,33.35
+"CT",112511,"KSHV dream array","Orf43 (64036)","KSHV","Orf43","KSHV dream arrayOrf43 (64036)","good","PP2",NA,NA,NA,NA,48.17,NA,NA,42.2,NA,NA,NA,NA,NA,NA,NA,35.96
+"CT",112511,"KSHV dream array","Orf44 (66282)","KSHV","Orf44","KSHV dream arrayOrf44 (66282)","good","PP2",NA,NA,NA,36.23,35.36,NA,NA,NA,NA,NA,NA,NA,35.8,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf44 (66755)","KSHV","Orf44","KSHV dream arrayOrf44 (66755)","good","PP2",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,36.89
+"CT",112511,"KSHV dream array","Orf44 (67024)","KSHV","Orf44","KSHV dream arrayOrf44 (67024)","good","PP2",NA,NA,NA,NA,NA,NA,NA,48.44,47.19,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf45,46,47,48 (68227)","KSHV","Orf45,46,47,48","KSHV dream arrayOrf45,46,47,48 (68227)","good","PP2",46.35,40.1,33.37,36.1,37.98,46.46,35.92,34.7,36.49,54.35,46.67,NA,36.38,35.12,NA,33.78
+"CT",112511,"KSHV dream array","Orf46,47,48 (69318)","KSHV","Orf46,47,48","KSHV dream arrayOrf46,47,48 (69318)","good","PP2",NA,NA,NA,NA,37.51,NA,NA,37.6,NA,36.04,NA,NA,NA,38.75,NA,34.75
+"CT",112511,"KSHV dream array","Orf47 or 48 (69635)","KSHV","Orf47 or 48","KSHV dream arrayOrf47 or 48 (69635)","good","PP2",NA,NA,35.85,NA,48.61,NA,NA,NA,34.32,NA,NA,NA,NA,NA,NA,36.16
+"CT",112511,"KSHV dream array","Orf47 or 48 (69773)","KSHV","Orf47 or 48","KSHV dream arrayOrf47 or 48 (69773)","good","PP2",NA,NA,NA,NA,NA,36.13,NA,35.52,35.63,35.75,NA,NA,NA,NA,NA,34.67
+"CT",112511,"KSHV dream array","Orf48 (70402)","KSHV","Orf48","KSHV dream arrayOrf48 (70402)","good","PP2",NA,NA,NA,NA,NA,NA,NA,35.64,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf49 or 50 (71851)","KSHV","Orf49 or 50","KSHV dream arrayOrf49 or 50 (71851)","good","PP2",NA,NA,33.86,NA,50.33,35.82,35.78,33.33,34.9,35.54,NA,NA,NA,36.19,NA,34.85
+"CT",112511,"KSHV dream array","Orf49 or 50 (72352)","KSHV","Orf49 or 50","KSHV dream arrayOrf49 or 50 (72352)","good","PP2",NA,35.69,36.07,NA,NA,NA,NA,37.81,NA,36.07,NA,NA,NA,NA,NA,36.34
+"CT",112511,"KSHV dream array","Orf50 (74850)","KSHV","Orf50","KSHV dream arrayOrf50 (74850)","good","PP2",36.66,NA,NA,NA,NA,NA,NA,NA,NA,56.8,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf50 or K8 (75170)","KSHV","Orf50 or K8","KSHV dream arrayOrf50 or K8 (75170)","good","PP2",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,41.51,NA
+"CT",112511,"KSHV dream array","Orf52 (77022)","KSHV","ORF52","KSHV dream arrayOrf52 (77022)","good","PP2",NA,NA,40.2,NA,NA,37.85,NA,36.77,NA,38.97,NA,NA,37.77,36.2,NA,34.04
+"CT",112511,"KSHV dream array","Orf52 (77128)","KSHV","ORF52","KSHV dream arrayOrf52 (77128)","good","PP2",NA,NA,NA,NA,NA,NA,NA,35.33,NA,35.52,NA,NA,34.25,32.88,NA,33.02
+"CT",112511,"KSHV dream array","Orf54 (77844)","KSHV","Orf54","KSHV dream arrayOrf54 (77844)","good","PP2",NA,NA,NA,NA,NA,NA,NA,35.27,NA,NA,NA,NA,NA,NA,NA,33.47
+"CT",112511,"KSHV dream array","Orf54 (78056)","KSHV","Orf54","KSHV dream arrayOrf54 (78056)","good","PP2",NA,NA,34.97,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,36.11,NA,34.88
+"CT",112511,"KSHV dream array","Orf55 (78956)","KSHV","Orf55","KSHV dream arrayOrf55 (78956)","good","PP2",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,41.58
+"CT",112511,"KSHV dream array","Orf55 (79193)","KSHV","Orf55","KSHV dream arrayOrf55 (79193)","good","PP2",NA,NA,NA,NA,NA,NA,NA,35.44,NA,NA,NA,NA,NA,36.33,NA,36.22
+"CT",112511,"KSHV dream array","Orf56 (80963)","KSHV","Orf56","KSHV dream arrayOrf56 (80963)","good","PP2",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf56 (81267)","KSHV","Orf56","KSHV dream arrayOrf56 (81267)","good","PP2",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf56 (81650)","KSHV","Orf56","KSHV dream arrayOrf56 (81650)","good","PP2",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf56 or 57 (83216)","KSHV","Orf56 or 57","KSHV dream arrayOrf56 or 57 (83216)","good","PP2",33.98,NA,32.98,31.74,34.12,33,31.92,30.66,NA,32.33,NA,NA,NA,32.86,NA,30.66
+"CT",112511,"KSHV dream array","Orf58 or 59,60,61,62 (94692)","KSHV","Orf58 or 59,60,61,62","KSHV dream arrayOrf58 or 59,60,61,62 (94692)","good","PP2",37.04,NA,36.86,37,36.87,36.86,36.67,35.95,NA,34.23,NA,NA,NA,35.26,NA,33.03
+"CT",112511,"KSHV dream array","Orf58 or 59,60,61,62 (94950)","KSHV","Orf58 or 59,60,61,62","KSHV dream arrayOrf58 or 59,60,61,62 (94950)","good","PP2",37.78,NA,34.28,37.65,37.64,36.75,34.28,34.23,NA,34.22,NA,NA,36.65,32.28,NA,32.47
+"CT",112511,"KSHV dream array","Orf58 or 59,60,61,62 (95417)","KSHV","Orf58 or 59,60,61,62","KSHV dream arrayOrf58 or 59,60,61,62 (95417)","good","PP2",37.48,NA,39.87,41.64,38.03,36.89,39.32,39.19,NA,35.28,NA,NA,NA,36.14,40.88,33.23
+"CT",112511,"KSHV dream array","Orf59,60,61,62 (95961)","KSHV","Orf59,60,61,62","KSHV dream arrayOrf59,60,61,62 (95961)","good","PP2",34.32,NA,36.18,36.42,35.63,34.36,35.16,35.09,34.25,33.75,NA,NA,36.08,33.4,NA,32.01
+"CT",112511,"KSHV dream array","Orf59,60,61,62 (96407)","KSHV","Orf59,60,61,62","KSHV dream arrayOrf59,60,61,62 (96407)","good","PP2",NA,NA,34.68,34.61,35.56,36.38,37.87,35.83,35.56,35.59,NA,NA,NA,38.61,NA,33.81
+"CT",112511,"KSHV dream array","ORF6 or 4 (5672)","KSHV","ORF6 or 4","KSHV dream arrayORF6 or 4 (5672)","good","PP1",NA,NA,NA,37.29,NA,37.55,NA,36.34,NA,41.97,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","ORF6 or 4 (5859)","KSHV","ORF6 or 4","KSHV dream arrayORF6 or 4 (5859)","good","PP1",NA,NA,NA,NA,35.65,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,36.79
+"CT",112511,"KSHV dream array","ORF6 or 4 (5921)","KSHV","ORF6 or 4","KSHV dream arrayORF6 or 4 (5921)","good","PP1",NA,NA,NA,NA,36.28,NA,35.09,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf60,61,62 (97138)","KSHV","Orf60,61,62","KSHV dream arrayOrf60,61,62 (97138)","good","PP2",NA,NA,43.64,NA,NA,46.8,NA,NA,NA,NA,NA,NA,NA,NA,NA,43.1
+"CT",112511,"KSHV dream array","Orf60,61,62 (97630)","KSHV","Orf60,61,62","KSHV dream arrayOrf60,61,62 (97630)","good","PP2",NA,NA,NA,NA,NA,37,NA,NA,NA,NA,NA,NA,NA,35.97,NA,34.36
+"CT",112511,"KSHV dream array","Orf61 or 62 (98333)","KSHV","Orf61 or 62","KSHV dream arrayOrf61 or 62 (98333)","good","PP2",NA,NA,NA,37.95,37.82,38.99,NA,38.53,NA,35.46,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf61 or 62 (98515)","KSHV","Orf61 or 62","KSHV dream arrayOrf61 or 62 (98515)","good","PP2",35.13,NA,NA,44.99,33.29,35.42,NA,NA,NA,NA,NA,NA,NA,NA,34.8,34.97
+"CT",112511,"KSHV dream array","Orf62 (100787)","KSHV","Orf62","KSHV dream arrayOrf62 (100787)","good","PP2",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf62 (100977)","KSHV","Orf62","KSHV dream arrayOrf62 (100977)","good","PP2",NA,44.18,NA,42.3,NA,NA,NA,36.13,NA,NA,NA,NA,NA,NA,37.21,NA
+"CT",112511,"KSHV dream array","Orf62 (101132)","KSHV","Orf62","KSHV dream arrayOrf62 (101132)","good","PP2",NA,NA,NA,NA,36.58,NA,NA,NA,NA,NA,NA,NA,NA,NA,55.96,35.82
+"CT",112511,"KSHV dream array","Orf63 (103119)","KSHV","Orf63","KSHV dream arrayOrf63 (103119)","good","PP2",NA,NA,NA,42.73,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,39.78
+"CT",112511,"KSHV dream array","Orf63 (103639)","KSHV","Orf63","KSHV dream arrayOrf63 (103639)","good","PP2",NA,NA,NA,NA,40.87,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,37.83
+"CT",112511,"KSHV dream array","Orf63 or Orf64 (111231)","KSHV","Orf63 or Orf64","KSHV dream arrayOrf63 or Orf64 (111231)","good","PP2",NA,NA,53.44,NA,39.26,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf63 or Orf64 (111599)","KSHV","Orf63 or Orf64","KSHV dream arrayOrf63 or Orf64 (111599)","good","PP2",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,36.27
+"CT",112511,"KSHV dream array","Orf65 or 66, 67, 67A (112376)","KSHV","Orf65 or 66, 67, 67A","KSHV dream arrayOrf65 or 66, 67, 67A (112376)","good","PP2",44.85,NA,44.5,NA,NA,NA,NA,41.33,50.11,43.96,NA,NA,NA,40.62,NA,40.13
+"CT",112511,"KSHV dream array","Orf66 or 67, 67A (112774)","KSHV","Orf66 or 67, 67A","KSHV dream arrayOrf66 or 67, 67A (112774)","good","PP2",NA,NA,35.8,49.59,37.46,37.86,38.1,35.41,NA,34.74,NA,NA,NA,34.22,NA,32.88
+"CT",112511,"KSHV dream array","Orf66 or 67, 67A (113453)","KSHV","Orf66 or 67, 67A","KSHV dream arrayOrf66 or 67, 67A (113453)","good","PP2",NA,NA,34.28,NA,NA,NA,34.97,NA,NA,36.26,NA,NA,NA,37.05,36.3,33.3
+"CT",112511,"KSHV dream array","Orf66 or 67, 67A (114218)","KSHV","Orf66 or 67, 67A","KSHV dream arrayOrf66 or 67, 67A (114218)","good","PP2",35.74,NA,35.76,NA,36.02,NA,NA,35.03,NA,57.24,NA,NA,NA,NA,NA,33.73
+"CT",112511,"KSHV dream array","Orf66 or 67, 67A (114453)","KSHV","Orf66 or 67, 67A","KSHV dream arrayOrf66 or 67, 67A (114453)","good","PP2",NA,NA,36.36,NA,NA,52.69,NA,NA,NA,36.65,NA,NA,NA,37.01,NA,33.98
+"CT",112511,"KSHV dream array","Orf67 or 67A (113980)","KSHV","Orf67 or 67A","KSHV dream arrayOrf67 or 67A (113980)","good","PP2",35.48,NA,NA,NA,NA,NA,NA,NA,NA,38.29,NA,NA,NA,35.77,NA,33.17
+"CT",112511,"KSHV dream array","Orf68 (115939)","KSHV","Orf68","KSHV dream arrayOrf68 (115939)","good","PP2",NA,NA,NA,NA,37.68,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf68 or Orf69 (116922)","KSHV","Orf68 or Orf69","KSHV dream arrayOrf68 or Orf69 (116922)","good","PP2",NA,NA,36.02,37.95,34.68,35.99,NA,NA,36.37,36.51,NA,NA,NA,NA,NA,36.28
+"CT",112511,"KSHV dream array","Orf68 or Orf69 (117120)","KSHV","Orf68 or Orf69","KSHV dream arrayOrf68 or Orf69 (117120)","good","PP2",NA,NA,NA,NA,33.96,36.65,NA,34.61,NA,NA,35.01,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf7 or 6 or 4 (8189)","KSHV","Orf7 or 6 or 4","KSHV dream arrayOrf7 or 6 or 4 (8189)","good","PP1",NA,41.61,NA,NA,35.51,NA,NA,NA,52.34,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf7 or 6 or 4 (8314)","KSHV","Orf7 or 6 or 4","KSHV dream arrayOrf7 or 6 or 4 (8314)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","ORF70 (20979)","KSHV","ORF70","KSHV dream arrayORF70 (20979)","good","PP2",NA,NA,NA,NA,NA,NA,42.47,35.96,NA,NA,NA,NA,36.01,NA,NA,NA
+"CT",112511,"KSHV dream array","ORF70 (20979)","KSHV","ORF70","KSHV dream arrayORF70 (20979)","good","PP1",NA,NA,36.94,NA,NA,38.95,NA,NA,NA,36.9,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","ORF71 (vFLIP) (122381,2)","KSHV","ORF71 (vFLIP)","KSHV dream arrayORF71 (vFLIP) (122381,2)","good","PP2",33.41,32.93,30.92,34.85,32.57,32.99,31.82,31,32.24,31.9,32.42,35.9,35.39,32.81,36.13,30.7
+"CT",112511,"KSHV dream array","ORF71 (vFLIP) (122381)","KSHV","ORF71 (vFLIP)","KSHV dream arrayORF71 (vFLIP) (122381)","good","PP1",34.88,32.73,31.84,38.99,34.9,32.36,32.87,31.6,31.71,31.98,33.35,NA,34.31,33.96,35.81,30.48
+"CT",112511,"KSHV dream array","ORF71 (vFLIP) (122443,2)","KSHV","ORF71 (vFLIP)","KSHV dream arrayORF71 (vFLIP) (122443,2)","good","PP2",33.92,32.91,30.75,36.14,32.52,32.4,32.03,31.09,31.07,31.38,32.17,NA,34.63,32.89,34.41,30.6
+"CT",112511,"KSHV dream array","ORF71 (vFLIP) (122443)","KSHV","ORF71 (vFLIP)","KSHV dream arrayORF71 (vFLIP) (122443)","good","PP1",35.75,32.94,30.68,33.12,32.66,32.01,32.18,31.49,31.4,32.03,32.64,NA,33.23,33.52,34.25,30.8
+"CT",112511,"KSHV dream array","Orf73 (LANA) (124002,2)","KSHV","Orf73 (LANA)","KSHV dream arrayOrf73 (LANA) (124002,2)","good","PP2",NA,38.97,37.35,38.77,37.01,32.74,36.21,36.3,36.95,39.02,NA,NA,NA,NA,NA,38.9
+"CT",112511,"KSHV dream array","Orf73 (LANA) (124002)","KSHV","Orf73 (LANA)","KSHV dream arrayOrf73 (LANA) (124002)","good","PP1",NA,38.61,40.62,39.99,37.04,33.29,39.5,39.26,36.43,38.95,NA,NA,NA,38.18,37.27,NA
+"CT",112511,"KSHV dream array","Orf73 (LANA) or 72 (vCyc) (123511,2)","KSHV","Orf73 (LANA) or 72 (vCyc)","KSHV dream arrayOrf73 (LANA) or 72 (vCyc) (123511,2)","good","PP2",34.02,33.87,31.92,38.57,33.42,32.27,33.98,33.03,31.39,32.79,34.22,NA,35.47,34.91,35.57,30.78
+"CT",112511,"KSHV dream array","Orf73 (LANA) or 72 (vCyc) (123511)","KSHV","Orf73 (LANA) or 72 (vCyc)","KSHV dream arrayOrf73 (LANA) or 72 (vCyc) (123511)","good","PP1",33.36,34.91,31.98,41.25,38.13,34.83,36.94,32.93,32.96,34.56,32.86,35.92,37.63,36.79,41.94,32.12
+"CT",112511,"KSHV dream array","Orf8 or 4,6,7 (10202)","KSHV","Orf8 or 4,6,7","KSHV dream arrayOrf8 or 4,6,7 (10202)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf8 or 4,6,7 (10467)","KSHV","Orf8 or 4,6,7","KSHV dream arrayOrf8 or 4,6,7 (10467)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf8 or 4,6,7 (10765)","KSHV","Orf8 or 4,6,7","KSHV dream arrayOrf8 or 4,6,7 (10765)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf9 or 4,6,7,8 (13610)","KSHV","Orf9 or 4,6,7,8","KSHV dream arrayOrf9 or 4,6,7,8 (13610)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,49.3,NA,NA,NA
+"CT",112511,"KSHV dream array","Orf9 or 4,6,7,8 (13806)","KSHV","Orf9 or 4,6,7,8","KSHV dream arrayOrf9 or 4,6,7,8 (13806)","good","PP1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,35.83,NA,34.52
+"CT",112511,"KSHV dream array","vIRF1 (K9) (84086)","KSHV","vIRF1 (K9)","KSHV dream arrayvIRF1 (K9) (84086)","good","PP2",38.93,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,36.04
+"CT",112511,"KSHV dream array","vIRF1 (K9) (84202)","KSHV","vIRF1 (K9)","KSHV dream arrayvIRF1 (K9) (84202)","good","PP2",NA,NA,NA,NA,NA,NA,NA,NA,NA,56.08,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","vIRF1 (K9) (84969)","KSHV","vIRF1 (K9)","KSHV dream arrayvIRF1 (K9) (84969)","good","PP2",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"CT",112511,"KSHV dream array","vIRF2 (92617)","KSHV","vIRF2","KSHV dream arrayvIRF2 (92617)","good","PP2",NA,NA,NA,NA,NA,NA,NA,NA,50.08,NA,NA,NA,NA,NA,NA,34.44
+"CT",112511,"KSHV dream array","vIRF4 (86524)","KSHV","vIRF4","KSHV dream arrayvIRF4 (86524)","good","PP2",NA,NA,NA,NA,35.05,36.58,NA,NA,34.87,35.63,NA,NA,NA,NA,NA,31.52
+"CT",112511,"KSHV dream array","vIRF4 (86975)","KSHV","vIRF4","KSHV dream arrayvIRF4 (86975)","good","PP2",NA,NA,NA,NA,33.7,NA,NA,NA,NA,45.24,NA,NA,NA,NA,NA,31.42
+"CT",112511,"KSHV dream array","Orf73 (LANA) (124002,2)a","KSHV","Orf73 (LANA)","KSHV dream arrayOrf73 (LANA) (124002,2)","good","PP2",NA,37.2,35.41,37.86,37.63,32.69,34.94,37.72,35.98,38.39,NA,NA,NA,38.42,NA,NA
