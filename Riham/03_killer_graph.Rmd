@@ -87,6 +87,7 @@ eigenvalues <- res.pca$eig
 head(eigenvalues[, 1:2])
 ```
 ```{r}
+#Scree plot
 pca_result <- PCA(numeric_data, graph = FALSE)
 fviz_eig(pca_result, addlabels = TRUE, ylim = c(0, 50))
 ```
