@@ -1,0 +1,488 @@
+---
+title: "PCA"
+author: "Riham Abdu"
+date: "2025-03-18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(ggplot2)
+library(ggfortify)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(FactoMineR)
+library(factoextra)
+library(cluster)   
+library(fossil)    
+library(gridExtra)
+library(MASS)
+```
+
+```{r}
+# Load Data
+#setwd("/Users/riham78/Documents/GitHub/DATA-481-Team-Virology/Riham/R Try1 heatmap n40")
+gex_data <- read.csv("data/KSV_Gex_Reduced.csv", row.names = 1)
+head(gex_data)
+
+clusters <- read_csv("data/sample_clusters.csv")
+head(clusters)
+```
+
+```{r}
+gex_data1 = gex_data[-18,]  # removed outlier
+nrow(gex_data1)
+hist(apply(gex_data1,1, function(x) sd(x, na.rm = TRUE)))
+```
+
+```{r}
+#Perform PCA
+pca_result <- prcomp(gex_data1)
+summary(pca_result)
+```
+
+
+```{r}
+pca_result1 <- PCA(gex_data1,scale. = TRUE, graph = FALSE)
+
+```
+
+```{r}
+eigenvalues <- pca_result1$eig
+head(eigenvalues[, 1:2])
+```
+```{r}
+#Scree plot
+fviz_eig(pca_result1, addlabels = TRUE, ylim = c(0, 100))
+```
+
+
+```{r}
+#Create a Mapping from sample_id to cluster
+clusters_filtered <- clusters$cluster[match(rownames(pca_result$x), clusters$sample_id)] 
+
+# Convert clusters to a character vector for modification
+custom_colors <- as.character(clusters_filtered)
+
+# Assign a distinct label for sample_id == 6268
+custom_colors[rownames(pca_result$x) == "6268"] <- "sample_6268"
+
+# Convert back to factor (ensures discrete color mapping)
+custom_colors <- as.factor(custom_colors)
+
+# Define color palette (assign yellow for cluster 1, and red for 6268)
+unique_cluster_colors <- scales::hue_pal()(length(unique(na.omit(clusters_filtered))))
+highlight_palette <- unique_cluster_colors
+highlight_palette[1] <- "orange"  # Assign yellow to cluster 1
+highlight_palette <- c(highlight_palette, "red")  # Adds red for 6268
+
+# Define shape and size mapping
+custom_shapes <- rep(1, length(levels(custom_colors)))  # Open circles for all
+custom_sizes <- rep(3, length(levels(custom_colors)))   # Base size 3 for all
+custom_sizes[levels(custom_colors) == "sample_6268"] <- 6  # Larger size for 6268
+```
+
+
+```{r}
+# PCA (1,2)
+ fviz_pca_ind(
+  pca_result,
+  geom.ind = "point",             # Show points for samples
+  col.ind = custom_colors,,        # Color individuals by Cluster
+  palette = highlight_palette,                # Use journal color palette
+  addEllipses = TRUE,             # Add confidence ellipses
+  ellipse.level = 0.95,           # Confidence level for ellipses
+  label = "none",                 # Remove labels 
+  title = "PCA: Samples Colored by Cluster"
+) +
+   scale_shape_manual(values = custom_shapes) + # Open circles
+  scale_size_manual(values = custom_shapes) +  # Increase size
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+    legend.title = element_text(size = 12),
+    legend.text = element_text(size = 10)
+  )
+
+```
+
+```{r}
+# PCA(2,3)
+ fviz_pca_ind(
+  pca_result,
+  axes = c(2, 3),                 # Specify axes for PCA components 2 and 3
+  geom.ind = "point",             # Show points for samples
+  col.ind =  custom_colors,    # Color individuals by Cluster
+  palette = highlight_palette,                # Use journal color palette
+  addEllipses = TRUE,             # Add confidence ellipses
+  ellipse.level = 0.95,           # Confidence level for ellipses
+  label = "none",                 # Remove labels 
+  title = "PCA: Samples Colored by Cluster (PC2 vs PC3)"
+) +
+   scale_shape_manual(values = custom_shapes) +  # Open circles for all
+  scale_size_manual(values = custom_sizes) +  # Increase size
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+    legend.title = element_text(size = 12),
+    legend.text = element_text(size = 10)
+  )
+```
+
+
+```{r}
+# PCA(3,1)
+ fviz_pca_ind(
+  pca_result,
+  axes = c(3, 1),                 # Specify axes for PCA components 3 and 1
+  geom.ind = "point",             # Show points for samples
+  col.ind =  custom_colors,    # Color individuals by Cluster
+  palette = highlight_palette,                # Use journal color palette
+  addEllipses = TRUE,             # Add confidence ellipses
+  ellipse.level = 0.95,           # Confidence level for ellipses
+  label = "none",                 # Remove labels 
+  title = "PCA: Samples Colored by Cluster (PC3 vs PC1)"
+) +
+   scale_shape_manual(values = custom_shapes) +  # Open circles for all
+  scale_size_manual(values = custom_sizes) +  # Increase size
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+    legend.title = element_text(size = 12),
+    legend.text = element_text(size = 10)
+  )
+```
+```{r, message = F}
+pca_axes_combinations <- list(
+  c(1, 2),
+  c(1, 3),
+  c(1, 4),
+  c(2, 3),
+  c(2, 4),
+  c(3, 4)
+)
+
+pca_plots <- list()
+
+# Loop through each combination of axes and store results
+for (axes in pca_axes_combinations) {
+  # Generate PCA plot for the current combination of axes
+  pca_plots[[paste(axes[1], axes[2], sep = "-")]] <- fviz_pca_ind(
+    pca_result,
+    axes = axes,           # Use specified axes combination
+    geom.ind = "point",    # Show points for samples
+    col.ind = custom_colors,  # Color by cluster
+    palette = highlight_palette,  # Custom color palette
+    addEllipses = TRUE,
+    ellipse.level = 0.95,
+    label = "none",
+    title = paste("PCA:", axes[1], "vs", axes[2])
+  ) +
+    scale_shape_manual(values = custom_shapes) +  # Open circles for all
+    scale_size_manual(values = custom_sizes) +    # Increase size for 6268
+    theme_minimal() +
+    theme(
+      plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+      legend.title = element_text(size = 12),
+      legend.text = element_text(size = 10)
+    )
+}
+
+# Combine the individual plots using gridExtra (for facet wrapping)
+
+grid.arrange(grobs = pca_plots, ncol = 2)  # Adjust ncol as necessary
+```
+
+
+```{r}
+# Step 1: Extract loadings for the first two PCs
+loadings <- pca_result$rotation[, 1:2]  # Extract loadings for PC1 and PC2
+
+# Step 2: Prepare the data for plotting
+loadings_df <- data.frame(
+  gene = rownames(loadings),        # Gene names
+  PC1_loading = loadings[, 1],      # Loadings for PC1
+  PC2_loading = loadings[, 2]       # Loadings for PC2
+)
+
+# Step 3: Plot the loadings using ggplot2
+ggplot(loadings_df, aes(x = PC1_loading, y = PC2_loading)) +
+  geom_point(aes(color = gene), size = 4) +         # Points for each gene
+  geom_text(aes(label = gene), hjust = 1.5, vjust = 1.5, size = 3) +  # Add gene labels
+  theme_minimal() +
+  ggtitle("PCA Gene Loading Vectors (PC1 vs PC2)") +
+  xlab("PC1 Loading") + 
+  ylab("PC2 Loading") +
+  theme(
+    plot.title = element_text(size = 11, face = "bold", hjust = 0.5),
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10)
+  )
+```
+#Each point represents a gene, and the x and y coordinates correspond to its loadings on PC1 and PC2.
+Genes closer together in this plot have more similar expression profiles, while those that are further apart show greater variability in their expression.
+Clusters of points suggest that those genes may be co-expressed or share similar functions
+The position of each point in the plot indicates how much variance each gene contributes to the overall dataset along the principal components.
+
+
+```{r}
+# 1. Simplest Approach: Simulate Cluster 1 dataset X by i.i.d. sampling N(0, 1)
+simulate_simplest_data <- function(n_samples, n_genes, mu, sigma) {
+  # Cluster 1: Xj ~ N(0, 1) for j = {1 ... d} and n samples
+  X <- matrix(rnorm(n_samples * n_genes), nrow = n_samples, ncol = n_genes)
+  
+  # Cluster 2: Y = X + mu (Mean shift)
+  Y <- matrix(rnorm(n_samples * n_genes, mean = mu, sd = sigma), nrow = n_samples, ncol = n_genes)
+  
+  # Combine the two clusters into a single dataset (Z_simplest)
+  Z_simplest <- rbind(X, Y)
+  
+  return(Z_simplest)
+}
+
+# 2.Simple Approach: Simulate Cluster 1 dataset X and Cluster 2 dataset Y separately
+simulate_simple_data <- function(n_samples, n_genes, mu, sigma) {
+  # Cluster 1: Xj ~ N(0, 1) for j = {1 ... d} and n samples
+  X <- matrix(rnorm(n_samples * n_genes), nrow = n_samples, ncol = n_genes)
+  
+  # Cluster 2: Yj ~ N(mu, sigma) for j = {1 ... d} and n samples
+  Y <- matrix(rnorm(n_samples * n_genes, mean = mu, sd = sigma), nrow = n_samples, ncol = n_genes)
+  
+  # Combine the two clusters into a single dataset (Z_simple)
+  Z_simple <- rbind(X, Y)
+  
+  return(Z_simple)
+}
+
+# 3.Complex Approach: Simulate data using multivariate Gaussian (correlated genes)
+simulate_complex_data <- function(n_samples, n_genes, mu, sigma, correlation) {
+  # Create the covariance matrix with correlation
+  covariance_matrix <- matrix(correlation, n_genes, n_genes)  # Fill with correlation
+  diag(covariance_matrix) <- 1  # Set diagonal elements (variances) to 1
+  
+  # Cluster 1: Multivariate normal N(mu = 0, sigma = I)
+  X <- mvrnorm(n_samples, mu = rep(0, n_genes), Sigma = covariance_matrix)
+  
+  # Cluster 2: Multivariate normal N(mu = mu, sigma = I)
+  Y <- mvrnorm(n_samples, mu = rep(mu, n_genes), Sigma = covariance_matrix)
+  
+  # Combine the two clusters into a single dataset (Z_complex)
+  Z_complex <- rbind(X, Y)
+  
+  return(Z_complex)
+}
+
+```
+
+```{r}
+# Simplest Approach (i.i.d. sampling N(0, 1) for Cluster 1 and Y = X + mu for Cluster 2)
+n_samples <- 50  # Number of samples per cluster
+n_genes <- 50    # Number of genes (you can vary this in the sensitivity analysis)
+mu <- 2          # Mean shift for cluster 2
+sigma <- 1       # Standard deviation for cluster 2
+
+# Generate simulated data (simplest approach)
+Z_simplest <- simulate_simplest_data(n_samples, n_genes, mu, sigma)
+
+# Generate true labels for the simplest approach
+true_labels_simplest <- c(rep(0, n_samples), rep(1, n_samples))
+
+# Perform k-means clustering on the combined dataset (Z_simplest)
+kmeans_result_simplest <- kmeans(Z_simplest, centers = 2, nstart = 25)
+predicted_labels_simplest <- kmeans_result_simplest$cluster
+
+# Calculate Adjusted Mutual Information (AMI) and Accuracy for the simplest approach
+ami_score_simplest <- adj.rand.index(true_labels_simplest, predicted_labels_simplest)
+accuracy_simplest <- sum(predicted_labels_simplest == true_labels_simplest) / length(true_labels_simplest)
+
+print(paste("Simplest Approach - AMI:", ami_score_simplest))
+print(paste("Simplest Approach - Accuracy:", accuracy_simplest))
+```
+#AMI is a measure of how well the predicted cluster labels match the true labels, accounting for chance. It ranges from 0 to 1
+#Accuracy is the proportion of correctly predicted points (i.e., the percentage of samples assigned to the correct cluster).
+```{r}
+# Simple Approach (Separate N(0, 1) for Cluster 1 and N(mu, sigma) for Cluster 2)
+# Generate simulated data (simple approach)
+Z_simple <- simulate_simple_data(n_samples, n_genes, mu, sigma)
+
+# Generate true labels for the simple approach
+true_labels_simple <- c(rep(0, n_samples), rep(1, n_samples))
+
+# Perform k-means clustering on the combined dataset (Z_simple)
+kmeans_result_simple <- kmeans(Z_simple, centers = 2, nstart = 25)
+predicted_labels_simple <- kmeans_result_simple$cluster
+
+# Calculate Adjusted Mutual Information (AMI) and Accuracy for the simple approach
+ami_score_simple <- adj.rand.index(true_labels_simple, predicted_labels_simple)
+accuracy_simple <- sum(predicted_labels_simple == true_labels_simple) / length(true_labels_simple)
+
+print(paste("Simple Approach - AMI:", ami_score_simple))
+print(paste("Simple Approach - Accuracy:", accuracy_simple))
+```
+
+```{r}
+# Complex Approach (Multivariate Gaussian with Correlation between Genes)
+correlation <- 0.7  # Correlation between genes (can vary this)
+
+# Generate simulated data (complex approach)
+Z_complex <- simulate_complex_data(n_samples, n_genes, mu, sigma, correlation)
+
+# Generate true labels for the complex approach
+true_labels_complex <- c(rep(0, n_samples), rep(1, n_samples))
+
+# Perform k-means clustering on the combined dataset (Z_complex)
+kmeans_result_complex <- kmeans(Z_complex, centers = 2, nstart = 25)
+predicted_labels_complex <- kmeans_result_complex$cluster
+
+# Calculate Adjusted Mutual Information (AMI) and Accuracy for the complex approach
+ami_score_complex <- adj.rand.index(true_labels_complex, predicted_labels_complex)
+accuracy_complex <- sum(predicted_labels_complex == true_labels_complex) / length(true_labels_complex)
+
+print(paste("Complex Approach - AMI:", ami_score_complex))
+print(paste("Complex Approach - Accuracy:", accuracy_complex))
+```
+
+```{r}
+# Sensitivity analysis for the Simplest Approach (i.i.d. sampling N(0, 1) for Cluster 1 and Y = X + mu for Cluster 2)
+results_simplest <- data.frame(NumGenes = integer(), AMI = numeric(), Accuracy = numeric(), Correlation = numeric())
+
+# Vary the number of genes (d) and correlation for the simplest approach
+for (d in seq(5, 50, by = 5)) {
+  for (cor in seq(0, 1, by = 0.2)) {  # Vary correlation from 0 (no correlation) to 1 (perfect correlation)
+    # Simulate new data with varying number of genes and correlation (simplest approach)
+    Z_simplest <- simulate_simplest_data(n_samples, d, mu, sigma)
+    
+    # Perform k-means clustering on the new dataset (simplest approach)
+    kmeans_result_simplest <- kmeans(Z_simplest, centers = 2, nstart = 25)
+    predicted_labels_simplest <- kmeans_result_simplest$cluster
+    
+    # Calculate AMI for the current number of genes and correlation
+    ami_score_simplest <- adj.rand.index(true_labels_simplest, predicted_labels_simplest)
+    
+    # Calculate Accuracy for the current clustering result
+    accuracy_simplest <- sum(predicted_labels_simplest == true_labels_simplest) / length(true_labels_simplest)
+    
+    # Store the results
+    results_simplest <- rbind(results_simplest, data.frame(NumGenes = d, AMI = ami_score_simplest, Accuracy = accuracy_simplest, Correlation = cor))
+  }
+}
+
+# Sensitivity analysis for the Simple Approach (Separate N(0, 1) for Cluster 1 and N(mu, sigma) for Cluster 2)
+results_simple <- data.frame(NumGenes = integer(), AMI = numeric(), Accuracy = numeric(), Correlation = numeric())
+
+# Vary the number of genes (d) and correlation for the simple approach
+for (d in seq(5, 50, by = 5)) {
+  for (cor in seq(0, 1, by = 0.2)) {  # Vary correlation from 0 (no correlation) to 1 (perfect correlation)
+    # Simulate new data with varying number of genes and correlation (simple approach)
+    Z_simple <- simulate_simple_data(n_samples, d, mu, sigma)
+    
+    # Perform k-means clustering on the new dataset (simple approach)
+    kmeans_result_simple <- kmeans(Z_simple, centers = 2, nstart = 25)
+    predicted_labels_simple <- kmeans_result_simple$cluster
+    
+    # Calculate AMI for the current number of genes and correlation
+    ami_score_simple <- adj.rand.index(true_labels_simple, predicted_labels_simple)
+    
+    # Calculate Accuracy for the current clustering result
+    accuracy_simple <- sum(predicted_labels_simple == true_labels_simple) / length(true_labels_simple)
+    
+    # Store the results
+    results_simple <- rbind(results_simple, data.frame(NumGenes = d, AMI = ami_score_simple, Accuracy = accuracy_simple, Correlation = cor))
+  }
+}
+# Sensitivity analysis: Vary the number of genes (d) and correlation for the complex approach
+results_complex <- data.frame(NumGenes = integer(), AMI = numeric(), Accuracy = numeric(), Correlation = numeric())
+
+# Vary the number of genes (d) and correlation
+for (d in seq(5, 50, by = 5)) {
+  for (cor in seq(0, 1, by = 0.2)) {  # Vary correlation from 0 (no correlation) to 1 (perfect correlation)
+    # Simulate new data with varying number of genes and correlation (complex approach)
+    Z_complex <- simulate_complex_data(n_samples, d, mu, sigma, cor)
+    
+    # Perform k-means clustering on the new dataset (complex approach)
+    kmeans_result_complex <- kmeans(Z_complex, centers = 2, nstart = 25)
+    predicted_labels_complex <- kmeans_result_complex$cluster
+    
+    # Calculate AMI for the current number of genes and correlation
+    ami_score_complex <- adj.rand.index(true_labels_complex, predicted_labels_complex)
+    
+    # Calculate Accuracy for the current clustering result
+    accuracy_complex <- sum(predicted_labels_complex == true_labels_complex) / length(true_labels_complex)
+    
+    # Store the results
+    results_complex <- rbind(results_complex, data.frame(NumGenes = d, AMI = ami_score_complex, Accuracy = accuracy_complex, Correlation = cor))
+  }
+}
+
+# Check the results of the sensitivity analysis for the approaches
+print(results_simplest)
+print(results_simple)
+print(results_complex)
+
+```
+```{r}
+# Plot AMI vs. Number of Genes for Simplest Approach
+ggplot(results_simplest, aes(x = NumGenes, y = AMI, color = as.factor(Correlation))) +
+  geom_line() +
+  geom_point() +
+  labs(title = "AMI vs. Number of Genes and Correlation (Simplest Approach)",
+       x = "Number of Genes", y = "Adjusted Mutual Information",
+       color = "Correlation") +
+  theme_minimal()
+
+# Plot Accuracy vs. Number of Genes for Simplest Approach
+ggplot(results_simplest, aes(x = NumGenes, y = Accuracy, color = as.factor(Correlation))) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Accuracy vs. Number of Genes and Correlation (Simplest Approach)",
+       x = "Number of Genes", y = "Accuracy", color = "Correlation") +
+  theme_minimal()
+```
+The first graph shows that AMI for the simplest approach remains high and stable as the number of genes increases, while the second graph reveals that Accuracy fluctuates around 0.5, showing poor clustering performance regardless of the number of genes.
+```{r}
+# Plot AMI vs. Number of Genes for Simple Approach
+ggplot(results_simple, aes(x = NumGenes, y = AMI, color = as.factor(Correlation))) +
+  geom_line() +
+  geom_point() +
+  labs(title = "AMI vs. Number of Genes and Correlation (Simple Approach)",
+       x = "Number of Genes", y = "Adjusted Mutual Information",
+       color = "Correlation") +
+  theme_minimal()
+
+# Plot Accuracy vs. Number of Genes for Simple Approach
+ggplot(results_simple, aes(x = NumGenes, y = Accuracy, color = as.factor(Correlation))) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Accuracy vs. Number of Genes and Correlation (Simple Approach)",
+       x = "Number of Genes", y = "Accuracy", color = "Correlation") +
+  theme_minimal()
+```
+For the simple approach, the first graph shows that AMI remains close to 1, indicating good clustering alignment with the true labels, while the second graph shows that Accuracy fluctuates around 0.5, indicating poor clustering performance despite the number of genes.
+
+```{r}
+# Visualize AMI vs. Number of Genes and Correlation (complex approach)
+ggplot(results_complex, aes(x = NumGenes, y = AMI, color = as.factor(Correlation))) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Sensitivity Analysis (Complex Approach): AMI vs. Number of Genes and Correlation",
+       x = "Number of Genes", y = "Adjusted Mutual Information", color = "Correlation") +
+  theme_minimal()
+
+# Visualize Accuracy vs. Number of Genes and Correlation (complex approach)
+ggplot(results_complex, aes(x = NumGenes, y = Accuracy, color = as.factor(Correlation))) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Sensitivity Analysis (Complex Approach): Accuracy vs. Number of Genes and Correlation",
+       x = "Number of Genes", y = "Accuracy", color = "Correlation") +
+  theme_minimal()
+
+```
+
+#The first graph shows how Adjusted Mutual Information (AMI) varies with the number of genes and correlation in the complex approach, where the AMI fluctuates as the number of genes changes, with higher correlations leading to stronger consistency in clustering.
+
+#The second graph displays how Accuracy changes with the number of genes and correlation for the complex approach, showing poor accuracy across all correlation levels, with larger fluctuations at different numbers of genes.
